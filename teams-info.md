@@ -4,7 +4,7 @@
 1. Eric Uriel Rojas Torres
 
 
-
+2. Alfonso Cid Angeles
 
 
 ## Team 2: Modulo Inscripciones
