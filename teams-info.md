@@ -28,7 +28,7 @@
 ## Team 5: Calendario de exámenes
 1. Melany Joana Toledo Escamilla
 
-
+3. Alan Daniel Salas Gutiérrez
 4. Samuel Riveroll Vargas
 
 ## Modulo 6: Modulo Registro de calificaciones
