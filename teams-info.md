@@ -17,7 +17,7 @@
 1. Ariel Rodriguez Monroy
 
 
-
+3. Dulce Maria Trinidad Garcia
 
 ## Team 4: Modulo Asignaturas/Materias
 1. Alan Uribe Hernández
