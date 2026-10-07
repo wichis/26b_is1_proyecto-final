@@ -10,7 +10,7 @@
 ## Team 2: Modulo Inscripciones
 1. Pamela Concepcion Abasolo Diaz
 
-
+3. Kevin Alejandro Nabor Matias
 
 
 ## Team 3: Modulo Profesores
