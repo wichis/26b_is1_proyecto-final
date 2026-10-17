@@ -3,7 +3,7 @@
 ## Team 1: Modulo Alumnos
 1. Eric Uriel Rojas Torres
 2. Job Natanael Flores Flores
-
+3. Alejandro Corral Zarza
 4. Alfonso Cid Angeles
 
 
