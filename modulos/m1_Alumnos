@@ -1,0 +1,100 @@
+# MÓDULO ALUMNOS
+
+**Equipo 1:** Alumnos
+
+## 1. RESUMEN
+El Módulo de Alumnos comprende la interfaz y lógica del sistema orientada al uso directo por parte del estudiante.
+Este módulo centraliza las herramientas académicas y administrativas esenciales para el alumno, permitiéndole consultar su 
+rendimiento escolar, gestionar su información personal, realizar trámites de inscripción/reinscripción y solicitar 
+cambios o documentos oficiales sin necesidad de acudir presencialmente a las oficinas administrativas.
+
+## 2. OBJETIVOS Y ALCANCE
+### 2.1. Objetivo General
+Proporcionar a los alumnos un punto de acceso unificado, intuitivo y seguro para autogestionar su perfil, consultar su 
+información académica en tiempo real y realizar trámites administrativos institucionales.
+
+### 2.2. Objetivos Específicos
+* Permitir la autenticación y actualización de datos personales, de contacto y domicilio del alumno.
+* Facilitar la consulta en tiempo real de calificaciones, horarios, materias inscritas e historial académico.
+* Automatizar la generación y descarga de documentos oficiales como la constancia de estudios.
+* Agilizar los procesos de reinscripción y solicitudes de cambio de grupo.
+
+### 2.3. Alcance
+* **Dentro del alcance:**
+  * Autenticación y gestión de perfil del alumno (cambio de contraseña, datos personales, domicilio y contacto).
+  * Consultas académicas (calificaciones del periodo, historial, horario de clases Y materias inscritas).
+  * Trámites y solicitudes (proceso de reinscripción, estado del trámite, cambio de grupo).
+  * Descargas de constancias en formato digital (PDF).
+* **Fuera del alcance:**
+  * Captura de calificaciones (función del Módulo de Profesores).
+  * Creación y asignación de materias u horarios globales (función del Módulo de Materias).
+
+## 3. REQUERIMIENTOS FUNCIONALES
+
+* **RF-01 (Iniciar sesión):** El sistema debe permitir al alumno autenticarse mediante su usuario y contraseña.
+* **RF-02 (Editar datos generales):** El alumno podrá modificar información general autorizada de su perfil.
+* **RF-03 (Iniciar reinscripción):** El alumno podrá seleccionar su carga académica para el nuevo ciclo escolar en el periodo permitido.
+* **RF-04 (Consultar datos personales):** El sistema mostrará la información registrada del perfil del alumno.
+* **RF-05 (Consultar calificaciones):** El alumno podrá revisar las evaluaciones parciales y finales registradas en el ciclo vigente.
+* **RF-06 (Consultar historial académico):** El sistema desplegará el avance curricular completo (kardex) con materias aprobadas, reprobadas y promedio global.
+* **RF-07 (Consultar horario):** El sistema permitirá visualizar la distribución de clases asignadas por día y hora para el ciclo vigente.
+* **RF-08 (Consultar materias inscritas):** El alumno podrá verificar la lista de asignaturas asignadas en su carga académica actual.
+* **RF-09 (Descargar constancia de estudios):** El sistema generará un documento PDF oficial descargable que certifique la condición académica del alumno.
+* **RF-10 (Solicitar cambio de grupo):** El alumno podrá registrar una solicitud para modificar su grupo asignado en una o más materias.
+* **RF-11 (Cambiar contraseña):** El alumno podrá actualizar su clave de acceso previa validación de su contraseña actual.
+* **RF-12 (Consultar estado de reinscripción):** El alumno podrá verificar el estatus del trámite de su reinscripción (En proceso, Aprobado, Rechazado o Con observaciones).
+
+## 4. ACTORES
+1. Eric Uriel Rojas Torres
+2. Job Natanael Flores Flores
+3. Alejandro Corral Zarza
+4. Alfonso Cid Angeles
+
+## 5. DIAGRAMA DE CASOS DE USO
+
+left to right direction
+actor "Alumno" as A
+
+rectangle "Módulo de Alumnos" {
+    usecase "Iniciar sesión" as UC1
+    usecase "Editar datos generales" as UC2
+    usecase "Iniciar reinscripción" as UC3
+    usecase "Consultar datos personales" as UC4
+    usecase "Consultar calificaciones" as UC5
+    usecase "Consultar historial académico" as UC6
+    usecase "Consultar horario" as UC7
+    usecase "Consultar materias inscritas" as UC8
+    usecase "Descargar constancia de estudios" as UC9
+    usecase "Solicitar cambio de grupo" as UC10
+    usecase "Cambiar contraseña" as UC11
+    usecase "Consultar estado de reinscripción" as UC12
+}
+A --> UC1
+A --> UC2
+A --> UC3
+A --> UC4
+A --> UC5
+A --> UC6
+A --> UC7
+A --> UC8
+A --> UC9
+A --> UC10
+A --> UC11
+A --> UC12
+
+## 6. GLOSARIO DE ABREVIATURAS 
+* **RF:** Requerimiento Funcional.
+* **RNF:** Requerimiento No Funcional.
+* **UC:** Caso de Uso.
+* **UI:** Interfaz de Usuario.
+* **PDF:** Formato de Documento Portable.
+
+## 7. REQUERIMIENTOS NO FUNCIONALES 
+* **RNF-01 (Autenticación):** El sistema debe requerir credenciales válidas para el acceso al módulo.
+* **RNF-02 (Cifrado de Contraseñas):** Las contraseñas almacenadas deben ser encriptadas mediante algoritmos de cifrado seguros.
+* **RNF-03 (Sesiones Expiradas):** La sesión del alumno se cerrará automáticamente tras 15 minutos de inactividad.
+* **RNF-04 (Tiempo de Respuesta):** Las peticiones de consulta deben responder en un tiempo menor a 5 segundos en condiciones normales de tráfico.
+* **RNF-05 (Generación de PDF):** La descarga de la constancia de estudios en formato PDF no debe tomar más de 3 segundos.
+* **RNF-06 (Disponibilidad):** El módulo debe mantener una disponibilidad mínima del 99% en períodos de reinscripción crítica.
+* **RNF-07 (Diseño Responsivo):** La interfaz debe adaptarse correctamente a dispositivos móviles, tabletas y computadoras de escritorio.
+* **RNF-07 (Accesibilidad):** Los elementos visuales deben cumplir con un contraste adecuado y navegación clara para facilitar su uso.
