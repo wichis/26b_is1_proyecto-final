@@ -14,16 +14,16 @@ Proporcionar a los alumnos un punto de acceso unificado, intuitivo y seguro para
 información académica en tiempo real y realizar trámites administrativos institucionales.
 
 ### 2.2. Objetivos Específicos
-* Permitir la autenticación y actualización de datos personales, de contacto y domicilio del alumno.
+* Permitir la autenticación y actualización de datos personales, de contacto y datos del alumno.
 * Facilitar la consulta en tiempo real de calificaciones, horarios, materias inscritas e historial académico.
 * Automatizar la generación y descarga de documentos oficiales como la constancia de estudios.
-* Agilizar los procesos de reinscripción y solicitudes de cambio de grupo.
+* Agilizar los procesos de reinscripción.
 
 ### 2.3. Alcance
 * **Dentro del alcance:**
   * Autenticación y gestión de perfil del alumno (cambio de contraseña, datos personales, domicilio y contacto).
   * Consultas académicas (calificaciones del periodo, historial, horario de clases Y materias inscritas).
-  * Trámites y solicitudes (proceso de reinscripción, estado del trámite, cambio de grupo).
+  * Trámites y solicitudes (proceso de reinscripción, estado del trámite).
   * Descargas de constancias en formato digital (PDF).
 * **Fuera del alcance:**
   * Captura de calificaciones (función del Módulo de Profesores).
@@ -40,9 +40,8 @@ información académica en tiempo real y realizar trámites administrativos inst
 * **RF-07 (Consultar horario):** El sistema permitirá visualizar la distribución de clases asignadas por día y hora para el ciclo vigente.
 * **RF-08 (Consultar materias inscritas):** El alumno podrá verificar la lista de asignaturas asignadas en su carga académica actual.
 * **RF-09 (Descargar constancia de estudios):** El sistema generará un documento PDF oficial descargable que certifique la condición académica del alumno.
-* **RF-10 (Solicitar cambio de grupo):** El alumno podrá registrar una solicitud para modificar su grupo asignado en una o más materias.
-* **RF-11 (Cambiar contraseña):** El alumno podrá actualizar su clave de acceso previa validación de su contraseña actual.
-* **RF-12 (Consultar estado de reinscripción):** El alumno podrá verificar el estatus del trámite de su reinscripción (En proceso, Aprobado, Rechazado o Con observaciones).
+* **RF-10 (Cambiar contraseña):** El alumno podrá actualizar su clave de acceso previa validación de su contraseña actual.
+* **RF-11 (Consultar estado de reinscripción):** El alumno podrá verificar el estatus del trámite de su reinscripción (En proceso, Aprobado, Rechazado o Con observaciones).
 
 ## 4. ACTORES
 1. Eric Uriel Rojas Torres
@@ -65,9 +64,8 @@ rectangle "Módulo de Alumnos" {
     usecase "Consultar horario" as UC7
     usecase "Consultar materias inscritas" as UC8
     usecase "Descargar constancia de estudios" as UC9
-    usecase "Solicitar cambio de grupo" as UC10
-    usecase "Cambiar contraseña" as UC11
-    usecase "Consultar estado de reinscripción" as UC12
+    usecase "Cambiar contraseña" as UC10
+    usecase "Consultar estado de reinscripción" as UC11
 }
 A --> UC1
 A --> UC2
@@ -80,7 +78,6 @@ A --> UC8
 A --> UC9
 A --> UC10
 A --> UC11
-A --> UC12
 
 ## 6. GLOSARIO DE ABREVIATURAS 
 * **RF:** Requerimiento Funcional.
