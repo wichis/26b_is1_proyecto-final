@@ -1,6 +1,4 @@
-# ESPECIFICACIÓN DE REQUERIMIENTOS DE SOFTWARE
-
-**Módulo:** Inicio de Sesión | Proyecto Escolar 26B
+**Módulo:** Inicio de Sesión 
 
 **Equipo Responsable:** Equipo 1  
 **Fecha:** Noviembre 2026
