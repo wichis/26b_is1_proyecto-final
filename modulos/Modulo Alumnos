@@ -27,12 +27,21 @@ información académica en tiempo real y realizar trámites administrativos inst
   * Descargas de constancias en formato digital (PDF).
 * **Fuera del alcance:**
   * Captura de calificaciones (función del Módulo de Profesores).
+  * Creación y asignación de materias u horarios globales (función del Módulo de Materias).
+
+## 3. REQUERIMIENTOS FUNCIONALES
+
+* **RF-01 (Iniciar sesión):** El sistema debe permitir al alumno autenticarse mediante su usuario y contraseña.
+* **RF-02 (Editar datos generales):** El alumno podrá modificar información general autorizada de su perfil.
+* **RF-03 (Iniciar reinscripción):** El alumno podrá seleccionar su carga académica para el nuevo ciclo escolar en el periodo permitido.
+* **RF-04 (Consultar datos personales):** El sistema mostrará la información registrada del perfil del alumno.
+* **RF-05 (Consultar calificaciones):** El alumno podrá revisar las evaluaciones parciales y finales registradas en el ciclo vigente.
+* **RF-06 (Consultar historial académico):** El sistema desplegará el avance curricular completo (kardex) con materias aprobadas, reprobadas y promedio global.
 * **RF-07 (Consultar horario):** El sistema permitirá visualizar la distribución de clases asignadas por día y hora para el ciclo vigente.
 * **RF-08 (Consultar materias inscritas):** El alumno podrá verificar la lista de asignaturas asignadas en su carga académica actual.
 * **RF-09 (Descargar constancia de estudios):** El sistema generará un documento PDF oficial descargable que certifique la condición académica del alumno.
 * **RF-10 (Cambiar contraseña):** El alumno podrá actualizar su clave de acceso previa validación de su contraseña actual.
 * **RF-11 (Consultar estado de reinscripción):** El alumno podrá verificar el estatus del trámite de su reinscripción (En proceso, Aprobado, Rechazado o Con observaciones).
-
 ## 4. ACTORES
 1. Eric Uriel Rojas Torres
 2. Job Natanael Flores Flores
