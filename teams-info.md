@@ -1,13 +1,13 @@
 # Teams
 
-## Team 1: Modulo Alumnos
+## Team 1: Modulo Alumnos + Modulo de Inicio de sesión
 1. Eric Uriel Rojas Torres
 2. Job Natanael Flores Flores
-3. Alejandro Corral Zarza 
+3. Alejandro Corral Zarza
 4. Alfonso Cid Angeles
 
 
-## Team 2: Modulo Inscripciones
+## Team 2: Modulo Inscripciones + Modulo de Periodos escolares
 1. Pamela Concepcion Abasolo Diaz
 2. Hector Jesus Garcia Monroy
 3. Santiago Cuevas Sanchez
@@ -31,14 +31,14 @@
 
 
 
-## Team 5: Calendario de exámenes
+## Team 5: Calendario de exámenes + Modulo de aulas, grupos
 1. Melany Joana Toledo Escamilla
 2. Jorge Uriel Vidal Morales
 3. Alan Daniel Salas Gutiérrez
 4. Samuel Riveroll Vargas
 
 
-## Modulo 6: Modulo Registro de calificaciones
+## Modulo 6: Modulo Registro de calificaciones + Modulo de catalogo de examenes.
 
 1. Luis Fernando Guerrero Pedroza
 2. Tendzin Angello Diaz Estrada
