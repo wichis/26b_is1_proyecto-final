@@ -1,0 +1,174 @@
+@startuml
+title Diagrama General de Casos de Uso\nSistema de Gestión Escolar
+
+left to right direction
+skinparam actorStyle stickman
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+skinparam usecase {
+  BackgroundColor #EFF6FF
+  BorderColor #334155
+}
+
+' ACTORES
+actor "Usuario" as Usuario
+actor "Alumno" as Alumno
+actor "Profesor" as Profesor
+actor "Coordinador" as Coordinador
+actor "Personal de Control Escolar" as ControlEscolar
+actor "Directivo" as Directivo
+actor "Administrador Escolar" as Administrador
+actor "Secretaría" as Secretaria
+
+' HERENCIA DE ACTORES
+Usuario <|-- Alumno
+Usuario <|-- Profesor
+Usuario <|-- Coordinador
+Usuario <|-- ControlEscolar
+Usuario <|-- Directivo
+Usuario <|-- Administrador
+Usuario <|-- Secretaria
+
+rectangle "Sistema de Gestión Escolar" {
+
+  package "USUARIO" {
+    usecase "Iniciar sesión" as UC_Iniciar
+    usecase "Cerrar sesión" as UC_Cerrar
+    usecase "Cambiar contraseña" as UC_Cambiar
+    usecase "Recuperar contraseña" as UC_Recuperar
+  }
+
+  package "ALUMNO" {
+    usecase "Consultar materias" as A1
+    usecase "Gestionar inscripción" as A2
+    usecase "Consultar horario" as A3
+    usecase "Consultar calificaciones" as A4
+    usecase "Consultar historial académico" as A5
+    usecase "Consultar calendario de exámenes" as A6
+    usecase "Consultar datos personales" as A7
+  }
+
+  package "PROFESOR" {
+    usecase "Consultar grupos" as P1
+    usecase "Consultar temario" as P2
+    usecase "Consultar lista de asistencia" as P3
+    usecase "Capturar calificaciones" as P4
+    usecase "Cerrar acta de calificaciones" as P5
+    usecase "Solicitar rectificación" as P6
+    usecase "Consultar calendario de exámenes" as P7
+    usecase "Solicitar aula" as P8
+    usecase "Consultar perfil" as P9
+  }
+
+  package "COORDINADOR" {
+    usecase "Gestionar materias" as C1
+    usecase "Gestionar inscripciones" as C2
+    usecase "Definir periodo de exámenes" as C3
+    usecase "Asignar aulas" as C4
+    usecase "Gestionar plan de estudio" as C5
+    usecase "Gestionar calendario de exámenes" as C6
+    usecase "Gestionar catálogo de examen" as C7
+    usecase "Consultar reportes" as C8
+  }
+
+  package "PERSONAL DE CONTROL ESCOLAR" {
+    usecase "Validar actas" as CE1
+    usecase "Oficializar actas" as CE2
+    usecase "Autorizar rectificaciones" as CE3
+    usecase "Registrar tipos de examen" as CE4
+    usecase "Validar periodo de captura" as CE5
+  }
+
+  package "DIRECTIVO" {
+    usecase "Consultar estadísticas" as D1
+    usecase "Consultar reportes" as D2
+    usecase "Supervisar áreas" as D3
+    usecase "Consultar resultados académicos" as D4
+  }
+
+  package "ADMINISTRADOR ESCOLAR" {
+    usecase "Gestionar usuarios" as AD1
+    usecase "Registrar usuarios" as AD2
+    usecase "Asignar roles y permisos" as AD3
+    usecase "Gestionar periodos escolares" as AD4
+    usecase "Consultar reportes generales" as AD5
+    usecase "Supervisar módulos" as AD6
+    usecase "Gestionar profesores" as AD7
+  }
+
+  package "SECRETARÍA" {
+    usecase "Gestionar expedientes" as S1
+    usecase "Registrar documentos" as S2
+    usecase "Emitir constancias" as S3
+    usecase "Consultar alumnos" as S4
+    usecase "Gestionar trámites" as S5
+  }
+}
+
+' CASOS DE USO GENERALES DEL USUARIO
+Usuario --> UC_Iniciar
+Usuario --> UC_Cerrar
+Usuario --> UC_Cambiar
+Usuario --> UC_Recuperar
+
+' CASOS DE USO DEL ALUMNO
+Alumno --> A1
+Alumno --> A2
+Alumno --> A3
+Alumno --> A4
+Alumno --> A5
+Alumno --> A6
+Alumno --> A7
+
+' CASOS DE USO DEL PROFESOR
+Profesor --> P1
+Profesor --> P2
+Profesor --> P3
+Profesor --> P4
+Profesor --> P5
+Profesor --> P6
+Profesor --> P7
+Profesor --> P8
+Profesor --> P9
+
+' CASOS DE USO DEL COORDINADOR
+Coordinador --> C1
+Coordinador --> C2
+Coordinador --> C3
+Coordinador --> C4
+Coordinador --> C5
+Coordinador --> C6
+Coordinador --> C7
+Coordinador --> C8
+
+' CASOS DE USO DE CONTROL ESCOLAR
+ControlEscolar --> CE1
+ControlEscolar --> CE2
+ControlEscolar --> CE3
+ControlEscolar --> CE4
+ControlEscolar --> CE5
+
+' CASOS DE USO DEL DIRECTIVO
+Directivo --> D1
+Directivo --> D2
+Directivo --> D3
+Directivo --> D4
+
+' CASOS DE USO DEL ADMINISTRADOR ESCOLAR
+Administrador --> AD1
+Administrador --> AD2
+Administrador --> AD3
+Administrador --> AD4
+Administrador --> AD5
+Administrador --> AD6
+Administrador --> AD7
+
+' CASOS DE USO DE SECRETARÍA
+Secretaria --> S1
+Secretaria --> S2
+Secretaria --> S3
+Secretaria --> S4
+Secretaria --> S5
+
+@enduml
