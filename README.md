@@ -4,6 +4,18 @@
 
 # I. Introducción
 
+El presente proyecto tiene como finalidad realizar el análisis, especificación y modelado de un sistema de control escolar, como parte de la materia de Ingeniería de Software I.
+
+La propuesta surge de la necesidad de mejorar la organización y administración de los procesos académicos y administrativos de la UAEMéx, considerando las problemáticas que pueden presentarse en la gestión de alumnos, asignaturas, profesores, inscripciones, periodos escolares, grupos, aulas, horarios y registro de calificaciones.
+
+El sistema de control escolar propuesto busca centralizar la información y establecer una organización adecuada de los diferentes procesos que intervienen en la administración académica, mediante la división de sus funcionalidades en módulos relacionados entre sí.
+
+Asimismo, se contempla la participación de distintos usuarios, como alumnos, profesores, coordinadores, personal administrativo, directivos y administradores del sistema, quienes tendrán diferentes responsabilidades y niveles de acceso de acuerdo con las funciones que desempeñan dentro de la institución.
+
+El desarrollo del proyecto comprende la identificación de necesidades, definición de requerimientos funcionales y no funcionales, delimitación del alcance y elaboración de modelos UML que permitan representar el comportamiento, estructura y organización del sistema propuesto.
+
+Es importante mencionar que este proyecto se enfoca exclusivamente en la documentación y especificación del sistema, por lo que no contempla su programación, construcción o implementación.
+
 # II. Contexto del proyecto
 
 {TODO diagrama de contexto del proyecto png}
