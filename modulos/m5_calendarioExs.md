@@ -15,17 +15,48 @@ Automatizar y gestionar la planificación, organización y publicación de las e
 ### Alcance
 Comprende la definición de periodos de evaluación, asignación de fechas, horarios y aulas, detección automática de conflictos por traslapes, publicación de calendarios y consultas personalizadas para alumnos, profesores y administradores.
 
-## Requerimientos funcionales 
-1. **RF-01 Programación de Periodos de Exámenes:** Permitir a la administración definir las ventanas de fechas hábiles para exámenes parciales y finales según el calendario lectivo.
-2. **RF-02 Asignación de Horarios y Aulas:** Permitir la asignación de fecha, hora inicio/fin y aula física o virtual para cada asignatura.
-3. **RF-03 Detección Automática de Conflictos (Validación de Traslape):** Validar que ningún estudiante o profesor tenga dos exámenes programados en el mismo bloque horario.
-4. **RF-04 Consulta Personalizada del Estudiante:** Visualización del calendario de exámenes individual filtrado por la carga académica inscrita del alumno.
-5. **RF-05 Consulta del Docente / Aplicador:** Visualización del calendario de aplicación de exámenes asignados y lista de asistencia.
+
+## Requerimientos funcionales
+
+**RF-01. Programación de periodos de exámenes**
+
+El sistema deberá permitir al Administrador / Coordinador definir y configurar las ventanas de fechas habilitadas para la aplicación de exámenes parciales, ordinarios, extraordinarios y a título de suficiencia, de acuerdo con el calendario escolar vigente.
+
+**RF-02. Asignación de fechas, horarios y aulas**
+
+El sistema deberá permitir al Administrador / Coordinador programar exámenes mediante la selección de asignatura, fecha, hora de inicio, hora de finalización, aula física o virtual y profesor o aplicador responsable.
+
+**RF-03. Validación automática de conflictos**
+
+El sistema deberá verificar, antes de registrar o modificar una programación, que no existan traslapes de horario para los alumnos y profesores involucrados. También deberá validar la disponibilidad del aula mediante la información proporcionada por el Módulo de Aulas. Si existe algún conflicto, el sistema deberá impedir la asignación e informar el motivo.
+
+**RF-04. Consulta personalizada del calendario del alumno**
+
+El sistema deberá permitir al Alumno consultar su calendario personal de exámenes, mostrando únicamente las evaluaciones correspondientes a las asignaturas en las que se encuentre inscrito, con sus respectivas fechas, horarios y aulas.
+
+**RF-05. Consulta del calendario del profesor o aplicador**
+
+El sistema deberá permitir al Profesor / Aplicador consultar los exámenes que tenga asignados, incluyendo asignatura, grupo, fecha, horario y aula correspondiente.
+
+**RF-06. Modificación y cancelación de exámenes programados**
+
+El sistema deberá permitir al Administrador / Coordinador modificar o cancelar una programación existente. Cuando se modifique la fecha, horario o aula, deberán ejecutarse nuevamente las validaciones de disponibilidad y conflictos antes de guardar los cambios.
+
+**RF-07. Publicación del calendario de exámenes**
+
+El sistema deberá permitir al Administrador / Coordinador publicar los calendarios de exámenes previamente programados y validados, para que los alumnos y profesores autorizados puedan consultarlos.
+
+**RF-08. Consulta de listas de asistencia**
+
+El sistema deberá permitir al Profesor / Aplicador consultar la lista de alumnos inscritos y habilitados para presentar cada examen asignado, identificando el grupo, asignatura y evaluación correspondiente.
 
 ## Actores
-* **Administrador / Coordinador:** Usuario encargado de definir los periodos, asignar fechas, horarios y aulas, modificar o cancelar programaciones y publicar el calendario.
-* **Alumno:** Usuario que consulta su calendario de exámenes personalizado según su carga académica.
-* **Profesor / Aplicador:** Usuario que consulta su calendario de aplicación y las listas de asistencia correspondientes.
+
+| Actor | Descripción | Funciones principales | Casos de uso |
+|---|---|---|---|
+| Administrador / Coordinador | Personal autorizado para administrar la programación de evaluaciones académicas. | Definir periodos de exámenes, asignar fechas, horarios y aulas, modificar o cancelar programaciones y publicar calendarios. | UC1, UC2, UC4, UC5 |
+| Alumno | Estudiante inscrito en asignaturas que requieren evaluaciones académicas. | Consultar su calendario personal de exámenes, incluyendo fecha, horario, aula y asignatura. | UC6 |
+| Profesor / Aplicador | Personal docente responsable de aplicar evaluaciones académicas. | Consultar el calendario de exámenes asignados y las listas de asistencia correspondientes. | UC7, UC8 |
 
 ## Diagrama de casos de uso
 

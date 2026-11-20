@@ -15,16 +15,53 @@ Gestionar la infraestructura escolar (aulas y auditorios) y coordinar la asignac
 ### Alcance
 Control, administración y optimización de los espacios físicos y virtuales de la institución educativa, registrando su capacidad y recursos disponibles para clases, exámenes y eventos.
 
-## Requerimientos funcionales 
-1. **RF-01 Registro y Gestión de Espacios:** Permitir dar de alta, modificar y dar de baja aulas y recintos, especificando número, edificio, tipo y capacidad de alumnos (ej. capacidad fija de 20 alumnos).
-2. **RF-02 Control de Recursos e Instalaciones:** Registrar el equipamiento disponible en cada espacio (proyectores, computadoras, conectores).
-3. **RF-03 Detección de Conflictos de Traslape de Espacio:** Validar en tiempo real que ningún aula sea asignado a dos clases, exámenes o eventos en el mismo bloque de horario.
-4. **RF-04 Validación de Aforo y Capacidad:** Verificar que el total de alumnos inscritos en un grupo o examen no supere la capacidad máxima del aula asignada.
+
+## Requerimientos funcionales
+
+**RF-01. Registro y administración de espacios**
+
+El sistema deberá permitir al Administrador / Gestor de Infraestructura registrar, modificar y dar de baja aulas, auditorios y otros espacios institucionales, especificando su identificador, edificio, tipo de espacio, capacidad máxima y estado de disponibilidad.
+
+**RF-02. Administración de recursos e instalaciones**
+
+El sistema deberá permitir al Administrador / Gestor de Infraestructura registrar y actualizar los recursos disponibles en cada espacio, como proyectores, computadoras, mobiliario y otros equipos necesarios para las actividades académicas.
+
+**RF-03. Detección de conflictos de horarios**
+
+El sistema deberá verificar que un aula o espacio no se encuentre asignado a más de una clase, examen o evento durante un mismo intervalo de tiempo. En caso de detectar un traslape, deberá impedir la asignación e informar el conflicto.
+
+**RF-04. Validación de aforo y capacidad**
+
+El sistema deberá comprobar que la cantidad de personas previstas para una clase, examen o evento no exceda la capacidad máxima registrada para el espacio solicitado. Si se supera el aforo permitido, deberá rechazar la asignación e informar el motivo.
+
+**RF-05. Consulta de aulas y recursos disponibles**
+
+El sistema deberá permitir a los usuarios autorizados consultar el catálogo de aulas y espacios institucionales, mostrando su ubicación, capacidad, tipo de espacio, estado y recursos disponibles.
+
+**RF-06. Consulta de horarios y asignaciones de espacios**
+
+El sistema deberá permitir consultar los horarios de ocupación de aulas y auditorios, identificando los espacios disponibles y ocupados durante las fechas y horarios seleccionados.
+
+**RF-07. Solicitud de espacios académicos**
+
+El sistema deberá permitir al Profesor y al Coordinador Académico registrar solicitudes de espacios para clases, exámenes o eventos, indicando el tipo de actividad, fecha, horario, cantidad estimada de asistentes y recursos requeridos.
+
+**RF-08. Asignación y confirmación de espacios**
+
+El sistema deberá permitir al Coordinador Académico asignar un aula o espacio institucional a una actividad académica. Antes de confirmar la asignación, deberá verificar la disponibilidad, evitar traslapes y comprobar el cumplimiento de la capacidad máxima permitida.
+
+**RF-09. Modificación y cancelación de asignaciones**
+
+El sistema deberá permitir al Coordinador Académico modificar o cancelar asignaciones de espacios existentes. Las modificaciones deberán someterse nuevamente a las validaciones de disponibilidad y aforo. Cuando una asignación sea cancelada, el espacio deberá quedar disponible para nuevas reservas en el horario correspondiente.
 
 ## Actores
-* **Administrador / Gestor de Infraestructura:** Usuario encargado de dar de alta, modificar y dar de baja aulas y recintos, así como registrar el equipamiento disponible.
-* **Coordinador Académico:** Usuario que coordina la asignación de espacios para clases regulares, exámenes y eventos especiales.
-* **Sistema (Automatizado):** Componente encargado de validar en tiempo real los traslapes de horarios y la verificación del aforo y capacidad.
+
+| Actor | Descripción | Funciones principales | Casos de uso |
+|---|---|---|---|
+| Administrador / Coordinador | Personal autorizado para administrar la infraestructura escolar y coordinar la asignación de espacios institucionales. | Registrar, modificar y dar de baja aulas y auditorios; gestionar capacidades y recursos; consultar disponibilidad; solicitar, asignar, modificar y cancelar reservas de espacios académicos. | UC1, UC2, UC3, UC4, UC5, UC6, UC8 |
+| Profesor | Personal docente que utiliza espacios institucionales para impartir clases, aplicar evaluaciones y realizar actividades académicas. | Consultar aulas y recursos disponibles, revisar horarios y solicitar espacios para actividades académicas. | UC1, UC2, UC3 |
+| Alumno | Estudiante que requiere consultar los espacios destinados a sus actividades académicas. | Consultar aulas, recursos disponibles y horarios de ocupación de espacios institucionales. | UC1, UC2 |
+
 
 ## Diagrama de casos de uso
 
