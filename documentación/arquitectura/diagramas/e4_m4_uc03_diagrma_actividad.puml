@@ -1,0 +1,23 @@
+@startuml
+title Coordiador De La Carrera Activar o Desactivar Asignatura
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Activar / desactivar asignatura";
+:Buscar asignatura;
+:Seleccionar asignatura;
+:Consultar estado actual;
+
+if (¿Qué acción desea realizar?) then (Activar)
+    :Cambiar estado a activa;
+else (Desactivar)
+    :Cambiar estado a inactiva;
+endif
+
+:Guardar cambios;
+:Mostrar mensaje de confirmación;
+
+stop
+@enduml
+

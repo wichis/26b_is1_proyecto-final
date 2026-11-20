@@ -1,0 +1,24 @@
+@startuml
+title Coordinador De La Carrera  Modificar Asignatura
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Modificar asignatura";
+:Buscar asignatura;
+:Seleccionar asignatura;
+:Mostrar información actual;
+:Modificar datos de la asignatura;
+:Validar información;
+
+if (¿La información es válida?) then (Sí)
+    :Guardar modificaciones;
+    :Mostrar mensaje de confirmación;
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir información;
+    :Validar información nuevamente;
+endif
+
+stop
+@enduml

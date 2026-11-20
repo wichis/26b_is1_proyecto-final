@@ -1,0 +1,24 @@
+@startuml
+title Coordinador De La Carrera Registrar Temario De Asignatura
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Registrar temario de asignatura";
+:Buscar asignatura;
+:Seleccionar asignatura;
+:Ingresar información del temario;
+:Adjuntar archivo o ingresar enlace del temario;
+:Validar información;
+
+if (¿La información es correcta?) then (Sí)
+    :Guardar temario de la asignatura;
+    :Mostrar mensaje de confirmación;
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir información;
+    :Validar nuevamente;
+endif
+
+stop
+@enduml

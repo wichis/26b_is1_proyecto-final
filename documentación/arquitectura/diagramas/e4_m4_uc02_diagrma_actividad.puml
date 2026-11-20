@@ -1,0 +1,22 @@
+@startuml
+title Coordinador de la Carrera Definir Datos Académicos De La Asignatura
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Definir datos académicos";
+:Seleccionar asignatura;
+:Capturar o establecer datos académicos;
+:Validar información;
+
+if (¿Los datos son correctos?) then (Sí)
+    :Guardar datos académicos;
+    :Mostrar mensaje de confirmación;
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir información;
+    :Validar información nuevamente;
+endif
+
+stop
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+title Coordinador De La Carrera Registrar Asignatura
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Registrar asignatura";
+:Capturar información de la asignatura;
+:Validar datos ingresados;
+
+if (¿La información es correcta?) then (Sí)
+    :Verificar que la asignatura no exista;
+
+    if (¿La asignatura ya existe?) then (Sí)
+        :Mostrar mensaje de asignatura existente;
+    else (No)
+        :Registrar asignatura;
+        :Guardar información;
+        :Mostrar confirmación de registro;
+    endif
+
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir información;
+endif
+
+stop
+@enduml

@@ -1,0 +1,31 @@
+@startuml
+title Coordinador De La Carrera Gestionar Plan De Estudios y Mapa Curricular
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Gestionar plan de estudios y mapa curricular";
+:Consultar plan de estudios actual;
+
+if (¿Qué desea realizar?) then (Modificar)
+    :Seleccionar plan de estudios;
+    :Modificar información del plan;
+    :Actualizar asignaturas y organización curricular;
+else (Crear)
+    :Crear nuevo plan de estudios;
+    :Agregar asignaturas;
+    :Organizar asignaturas en el mapa curricular;
+endif
+
+:Validar información del plan;
+
+if (¿La información es correcta?) then (Sí)
+    :Guardar cambios;
+    :Mostrar plan de estudios actualizado;
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir información;
+endif
+
+stop
+@enduml
