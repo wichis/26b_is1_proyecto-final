@@ -56,11 +56,11 @@ El sistema deberá permitir al Coordinador Académico modificar o cancelar asign
 
 ## Actores
 
-| Actor | Descripción | Funciones principales | Casos de uso |
-|---|---|---|---|
-| Administrador / Coordinador | Personal autorizado para administrar la infraestructura escolar y coordinar la asignación de espacios institucionales. | Registrar, modificar y dar de baja aulas y auditorios; gestionar capacidades y recursos; consultar disponibilidad; solicitar, asignar, modificar y cancelar reservas de espacios académicos. | UC1, UC2, UC3, UC4, UC5, UC6, UC8 |
-| Profesor | Personal docente que utiliza espacios institucionales para impartir clases, aplicar evaluaciones y realizar actividades académicas. | Consultar aulas y recursos disponibles, revisar horarios y solicitar espacios para actividades académicas. | UC1, UC2, UC3 |
-| Alumno | Estudiante que requiere consultar los espacios destinados a sus actividades académicas. | Consultar aulas, recursos disponibles y horarios de ocupación de espacios institucionales. | UC1, UC2 |
+| Actor | Descripción |
+|---|---|
+| Administrador / Coordinador | Personal de la institución educativa con autoridad administrativa y académica sobre la gestión de infraestructura y organización de espacios escolares. |
+| Profesor | Personal docente de la institución educativa que participa en actividades académicas y hace uso de los espacios destinados a la enseñanza y evaluación. |
+| Alumno | Estudiante inscrito en la institución educativa que utiliza los espacios escolares para asistir a clases, evaluaciones y otras actividades académicas. |
 
 
 ## Diagrama de casos de uso
