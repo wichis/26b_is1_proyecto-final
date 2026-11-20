@@ -1,0 +1,12 @@
+@startuml
+start
+:Alumno edita teléfono y/o dirección;
+:Sistema valida formato de campos;
+if (¿Datos válidos?) then (Sí)
+  :Guarda cambios en la base de datos;
+  :Muestra confirmación de actualización;
+else (No)
+  :Muestra error de validación;
+endif
+stop
+@enduml

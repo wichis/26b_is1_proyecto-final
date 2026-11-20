@@ -1,0 +1,19 @@
+@startuml
+actor Alumno
+participant "UI Reinscripción" as UI
+participant "Controlador Reinscripción" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Clic en "Iniciar reinscripción"
+UI -> Ctrl : POST /api/alumnos/reinscripcion
+Ctrl -> DB : Validar elegibilidad y registrar trámite
+alt Elegible
+  DB --> Ctrl : Trámite "En proceso"
+  Ctrl --> UI : 201 Created
+  UI --> Alumno : Confirma inicio de reinscripción
+else No elegible
+  DB --> Ctrl : Restricción detectada
+  Ctrl --> UI : 400 Bad Request
+  UI --> Alumno : Informa motivo de restricción
+end
+@enduml

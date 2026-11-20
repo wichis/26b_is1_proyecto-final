@@ -1,0 +1,12 @@
+@startuml
+start
+:Alumno solicita descargar constancia;
+:Sistema verifica estatus vigente del alumno;
+if (¿Alumno vigente y sin bloqueo?) then (Sí)
+  :Genera documento PDF oficial;
+  :Inicia descarga del PDF;
+else (No)
+  :Muestra aviso de restricción;
+endif
+stop
+@enduml

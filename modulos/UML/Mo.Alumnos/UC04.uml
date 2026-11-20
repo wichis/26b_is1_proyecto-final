@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Perfil" as UI
+participant "Controlador Perfil" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Abre "Datos personales"
+UI -> Ctrl : GET /api/alumnos/datos-personales
+Ctrl -> DB : Obtener información del alumno
+DB --> Ctrl : Datos personales
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra datos en pantalla
+@enduml

@@ -1,0 +1,19 @@
+@startuml
+actor Alumno
+participant "UI Seguridad" as UI
+participant "Controlador Seguridad" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Ingresa contraseña actual y nueva
+UI -> Ctrl : PUT /api/alumnos/password
+Ctrl -> DB : Validar contraseña actual
+alt Contraseña actual válida
+  Ctrl -> DB : Guardar nueva contraseña cifrada
+  DB --> Ctrl : Actualizada
+  Ctrl --> UI : 200 OK
+  UI --> Alumno : Confirma cambio de contraseña
+else Contraseña actual inválida
+  Ctrl --> UI : 400 Bad Request
+  UI --> Alumno : Indica contraseña incorrecta
+end
+@enduml

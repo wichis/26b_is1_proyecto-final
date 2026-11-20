@@ -1,0 +1,18 @@
+@startuml
+actor Alumno
+participant "UI Alumno" as UI
+participant "Controlador Auth" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Ingresa matrícula y contraseña
+UI -> Ctrl : POST /api/alumnos/login
+Ctrl -> DB : Consultar alumno y validar hash
+alt Credenciales válidas
+  DB --> Ctrl : Usuario válido
+  Ctrl --> UI : 200 OK (Token de sesión)
+  UI --> Alumno : Muestra dashboard
+else Credenciales inválidas
+  DB --> Ctrl : No coincide
+  Ctrl --> UI : 401 Unauthorized
+  UI --> Alumno : Muestra error de credenciales
+end

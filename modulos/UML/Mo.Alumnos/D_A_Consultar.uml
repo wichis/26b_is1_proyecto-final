@@ -1,0 +1,7 @@
+@startuml
+start
+:Alumno solicita ver datos personales;
+:Sistema recupera registro del alumno;
+:Muestra datos personales y generales;
+stop
+@enduml

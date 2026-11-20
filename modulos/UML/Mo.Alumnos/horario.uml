@@ -1,0 +1,6 @@
+@startuml
+start
+:Alumno solicita consultar horario;
+:Sistema obtiene bloques por día, hora y aula;
+:Muestra horario del ciclo vigente;
+stop

@@ -1,0 +1,14 @@
+@startuml
+[*] --> NoAutenticado
+
+NoAutenticado --> Activa : Credenciales válidas (UC1)
+NoAutenticado --> Bloqueada : Múltiples intentos fallidos
+
+Activa --> Activa : Actividad / Consultas (UC2-UC11)
+Activa --> Expirada : 15 min de inactividad (RNF-03)
+Activa --> Cerrada : Cierre de sesión manual
+
+Expirada --> NoAutenticado : Reautenticación requerida
+Cerrada --> NoAutenticado : Nueva sesión
+Bloqueada --> NoAutenticado : Desbloqueo / recuperación
+@enduml

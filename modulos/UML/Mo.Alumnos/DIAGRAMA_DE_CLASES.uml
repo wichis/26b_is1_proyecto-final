@@ -1,0 +1,110 @@
+@startuml
+skinparam classAttributeIconSize 0
+
+abstract class Usuario {
+  - idUsuario: String
+  - nombre: String
+  - apellidoPaterno: String
+  - apellidoMaterno: String
+  - correo: String
+  - passwordHash: String
+  - activo: Boolean
+  + iniciarSesion(credencial: String, password: String): Boolean
+  + cambiarPassword(actual: String, nueva: String): Boolean
+}
+
+class Alumno {
+  - matricula: String
+  - telefono: String
+  - direccion: String
+  - semestreActual: int
+  - promedioGeneral: float
+  - estatusAcademico: String
+  + consultarDatosPersonales(): DatosAlumno
+  + editarDatosGenerales(telefono: String, direccion: String): Boolean
+}
+
+class Profesor {
+  - numeroEmpleado: String
+  - especialidad: String
+  + registrarCalificacion(idInscripcion: int, nota: float): Boolean
+}
+
+class Coordinador {
+  - departamento: String
+  + gestionarAsignatura(materia: Asignatura): void
+  + configurarGrupo(grupo: Grupo): void
+}
+
+class Administrativo {
+  - area: String
+  + validarReinscripcion(idTramite: int, estado: EstadoReinscripcion, obs: String): void
+}
+
+class Asignatura {
+  - claveMateria: String
+  - nombreMateria: String
+  - creditos: int
+  - semestreSugerido: int
+}
+
+class Grupo {
+  - idGrupo: int
+  - claveGrupo: String
+  - cicloEscolar: String
+  - cupoMaximo: int
+}
+
+class Horario {
+  - idHorario: int
+  - diaSemana: String
+  - horaInicio: String
+  - horaFin: String
+  - aula: String
+}
+
+class InscripcionMateria {
+  - idInscripcion: int
+  - parcial1: float
+  - parcial2: float
+  - calificacionFinal: float
+  - ordinario: float
+  - acreditada: Boolean
+}
+
+class Reinscripcion {
+  - idTramite: int
+  - cicloDestino: String
+  - fechaSolicitud: Date
+  - estado: EstadoReinscripcion
+  - observaciones: String
+}
+
+class ConstanciaEstudios {
+  - folio: String
+  - fechaEmision: Date
+  - codigoValidacion: String
+  + generarPDF(): ArchivoPDF
+}
+
+enum EstadoReinscripcion {
+  EN_PROCESO
+  APROBADO
+  RECHAZADO
+  CON_OBSERVACIONES
+}
+
+Usuario <|-- Alumno
+Usuario <|-- Profesor
+Usuario <|-- Coordinador
+Usuario <|-- Administrativo
+
+Asignatura "1" --> "0..*" Grupo : oferta
+Grupo "1" --> "0..*" Horario : tiene
+Grupo "1" --> "0..*" Profesor : asigna
+Alumno "1" --> "0..*" InscripcionMateria : cursa
+Grupo "1" --> "0..*" InscripcionMateria : incluye
+Alumno "1" --> "0..*" Reinscripcion : tramita
+Reinscripcion --> EstadoReinscripcion
+Alumno "1" --> "0..*" ConstanciaEstudios : solicita
+@enduml

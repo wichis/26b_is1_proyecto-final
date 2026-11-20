@@ -1,0 +1,7 @@
+@startuml
+start
+:Alumno solicita consultar calificaciones;
+:Sistema consulta notas del ciclo vigente;
+:Muestra calificaciones parciales y finales;
+stop
+@enduml

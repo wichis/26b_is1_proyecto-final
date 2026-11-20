@@ -1,0 +1,11 @@
+@startuml
+start
+:Alumno ingresa matrícula y contraseña;
+:Sistema valida credenciales;
+if (¿Credenciales válidas?) then (Sí)
+  :Crea sesión y abre menú del alumno;
+else (No)
+  :Muestra mensaje de credenciales inválidas;
+endif
+stop
+@enduml
