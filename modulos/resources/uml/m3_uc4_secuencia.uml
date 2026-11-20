@@ -1,0 +1,84 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+skinparam state {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+skinparam class {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+
+title UC4. Dar de baja profesor: secuencia
+
+hide footbox
+skinparam sequenceMessageAlign center
+actor "Administrador escolar" as Actor
+boundary "Vista de\nProfesores" as Vista
+control "Control de\nProfesores" as Control
+participant "Acceso\ncompartido" as Acceso
+database "Registro de\nprofesores" as Registro
+Actor -> Vista : Seleccionar profesor y confirmar solicitud de baja
+Vista -> Control : darBajaProfesor(id, confirmación)
+Control -> Acceso : comprobarAcceso(operación, sesión)
+Acceso --> Control : permiso
+alt acceso no autorizado
+ Control --> Vista : acceso rechazado
+ Vista --> Actor : informar rechazo
+else acceso autorizado
+
+Control -> Registro : obtenerProfesor(profesorId)
+alt fallo de lectura
+  Registro --> Control : error de consulta
+  Control --> Vista : consulta no disponible
+  Vista --> Actor : informar fallo sin cambiar el estado
+else registro inexistente
+  Registro --> Control : ausencia
+  Control --> Vista : profesor no encontrado
+  Vista --> Actor : informar ausencia
+else registro encontrado
+  Registro --> Control : datos y estado
+  alt baja ya aplicada
+    Control --> Vista : estado ya dado de baja
+    Vista --> Actor : informar sin borrar datos
+  else registro vigente
+    Control -> Registro : marcarBajaLogica(profesorId)
+    note right of Registro
+      Conservar el registro y sus
+      referencias históricas.
+      No realizar borrado físico.
+    end note
+    alt actualización confirmada
+      Registro --> Control : baja confirmada
+      Control --> Vista : confirmación de baja
+      Vista --> Actor : mostrar estado actualizado
+    else fallo de actualización
+      Registro --> Control : operación no confirmada
+      Control --> Vista : error de baja
+      Vista --> Actor : informar fallo sin confirmar la baja
+    end
+  end
+end
+end
+@enduml

@@ -1,0 +1,70 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+skinparam state {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+skinparam class {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+
+title UC4. Dar de baja profesor: actividades
+
+|Administrador escolar|
+start
+:Seleccionar profesor y confirmar solicitud de baja;
+|Módulo Profesores|
+:Comprobar identidad y permiso de operación;
+if (¿Acceso autorizado?) then (sí)
+else (no)
+ :Informar rechazo de acceso;
+ stop
+endif
+
+:Obtener profesor y estado;
+if (¿La consulta terminó correctamente?) then (sí)
+else (no)
+ :Informar fallo de consulta sin cambiar el estado;
+ stop
+endif
+
+if (¿Existe el registro?) then (sí)
+else (no)
+ :Informar que no se encontró el profesor;
+ stop
+endif
+if (¿La baja ya está aplicada?) then (sí)
+ :Informar el estado sin borrar datos;
+ stop
+else (no)
+endif
+:Aplicar baja lógica y conservar historial;
+if (¿Actualización confirmada?) then (sí)
+ :Mostrar confirmación de baja;
+else (no)
+ :Informar fallo sin confirmar la baja;
+endif
+stop
+@enduml
