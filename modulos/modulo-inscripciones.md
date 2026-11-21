@@ -67,7 +67,6 @@ admin --> UC8
 
 @enduml
 ```
-
 ![Diagrama de Casos de Uso](resources/imgs/m2_inscripciones_casos_uso.png)
 
 
@@ -81,3 +80,126 @@ admin --> UC8
 * *Integridad de datos:* El sistema debe garantizar que dos alumnos no puedan ocupar el último cupo disponible al mismo tiempo (control de concurrencia básico).
 * *Disponibilidad:* El módulo debe estar disponible de forma continua durante los periodos oficiales de inscripción establecidos por la coordinación.
 * *Compatibilidad:* La interfaz debe ser accesible y funcional desde cualquier navegador web moderno (Chrome, Firefox, Edge).
+
+  
+# 5.2 Diagramas de estado
+
+## 5.2.1 Diagrama de estado: Seleccionar materias
+
+Este diagrama muestra el ciclo de vida de una solicitud de inscripción cuando el alumno selecciona materias.
+
+**Código PlantUML:**
+
+```plantuml
+@startuml
+!pragma layout smetana
+title Estados de Seleccionar Materias
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #444444
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+
+state "Consultando oferta" as Consultando
+state "Validando materia" as Validando
+state "Materia aceptada" as Aceptada
+state "Materia rechazada" as Rechazada
+state "Selección completa" as Completa
+
+[*] --> Consultando : el Alumno abre\nla oferta académica
+
+Consultando --> Validando : el Alumno elige\nuna materia
+
+Validando --> Aceptada : [hay cupo y no hay traslape]
+Validando --> Rechazada : [sin cupo o con traslape]
+
+Rechazada --> Consultando : el Alumno elige\notra materia
+Aceptada --> Consultando : el Alumno agrega\notra materia
+Aceptada --> Completa : el Alumno termina\nsu selección
+
+Completa --> [*]
+
+note right of Consultando
+  El alumno revisa las materias
+  disponibles del periodo.
+end note
+
+note right of Validando
+  El sistema revisa cupo
+  y traslape de horario.
+end note
+
+note right of Completa
+  La selección queda lista
+  para confirmar la inscripción.
+end note
+@enduml
+```
+**Diagrama:**
+
+![Diagrama de estado - Seleccionar materias](resources/imgs/m2_inscripciones_estados_seleccionar_materias.png)
+
+---
+
+## 5.2.2 Diagrama de estado: Validar traslape de horario
+
+Este diagrama muestra los estados por los que pasa la validación de horario cuando el alumno intenta inscribir una materia.
+
+**Código PlantUML:**
+
+```plantuml
+@startuml
+!pragma layout smetana
+title Estados de Validación de Traslape de Horario
+
+skinparam shadowing false
+skinparam defaultFontName Arial
+skinparam defaultFontSize 13
+skinparam roundCorner 12
+skinparam ArrowColor #444444
+skinparam stateBackgroundColor #EAF2FB
+skinparam stateBorderColor #2F5D8A
+skinparam noteBackgroundColor #FFF7E6
+
+state "Solicitada" as Solicitada
+state "Comparando horarios" as Comparando
+state "Sin traslape" as SinTraslape
+state "Con traslape" as ConTraslape
+state "Aprobada" as Aprobada
+state "Alumno notificado" as Notificado
+
+[*] --> Solicitada : el Alumno selecciona\nuna materia
+
+Solicitada --> Comparando : el Sistema recibe\nlas materias seleccionadas
+
+Comparando --> SinTraslape : [los horarios no coinciden]
+Comparando --> ConTraslape : [los horarios coinciden]
+
+SinTraslape --> Aprobada : se registra\nla validación correcta
+ConTraslape --> Notificado : se informa qué\nmaterias chocan
+
+Aprobada --> [*]
+Notificado --> [*]
+
+note right of Comparando
+  Se comparan días y horas
+  de las materias ya elegidas.
+end note
+
+note right of Notificado
+  La materia no se agrega
+  a la selección del alumno.
+end note
+@enduml
+```
+
+**Diagrama:**
+
+![Diagrama de estado - Validar traslape de horario](resources/imgs/m2_inscripciones_estados_validar_traslape.png)
+
+---
+
