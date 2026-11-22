@@ -197,3 +197,164 @@ package "Nivel 1 (Contenedores / Subsistemas)" {
 
 ### Infraestructura de Soporte
 * *Procesamiento Asíncrono y Eventos:* Emplea una *Cola de Eventos* para desacoplar el envío de notificaciones hacia los usuarios u otros subsistemas al confirmarse un cambio o asignación de espacio.
+---
+
+## Diagrama de Componentes
+
+```plantuml
+@startuml Modulo8_Aulas_Componentes
+title Diagrama de Componentes - Módulo 8: Asignación de Aulas
+
+skinparam componentStyle uml2
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+package "Clientes / Usuarios" {
+    [Navegador Web / App Móvil] as FrontEnd
+    [Módulo de Alumnos] as ModAlumnos
+    [Módulo de Inscripciones] as ModInscripciones
+    [Módulo Calendario de Exámenes] as ModExamenes
+}
+
+component "Sistema de Gestión y Asignación de Aulas" {
+    
+    package "API Backend (Servicios de Aulas)" {
+        [Servicio de Infraestructura\n(infraSvc1)] as InfraSvc
+        [Servicio de Asignación y Reservas\n(reserSvc1)] as ReserSvc
+        [Validador de Disponibilidad y Aforo\n(validSvc1)] as ValidSvc
+        [Servicio de Consulta de Espacios\n(consultaSvc1)] as ConsultaSvc
+
+        interface "IValidacion" as IVal
+        interface "IInfraestructura" as IInf
+        
+        ValidSvc -up- IVal
+        InfraSvc -right- IInf
+        
+        ReserSvc ..> IVal : <<use>>
+        ReserSvc ..> IInf : <<use>>
+        ConsultaSvc ..> IInf : <<use>>
+    }
+
+    package "Persistencia y Mensajería" {
+        database "Base de Datos de\nInfraestructura" as DB
+        database "Caché de Horarios" as Cache
+        queue "Cola de Eventos" as Queue
+        [Servicio de Notificaciones] as NotifSvc
+    }
+}
+
+interface "API REST Infraestructura" as API_Infra
+interface "API REST Reservas" as API_Reser
+interface "API REST Consultas" as API_Cons
+
+InfraSvc -up- API_Infra
+ReserSvc -up- API_Reser
+ConsultaSvc -up- API_Cons
+
+FrontEnd ..> API_Infra : HTTP/S
+FrontEnd ..> API_Reser : HTTP/S
+FrontEnd ..> API_Cons : HTTP/S
+
+ModAlumnos ..> API_Cons : Consulta aula / aforo
+ModInscripciones ..> API_Reser : Reserva clase regular
+ModExamenes ..> API_Reser : Reserva examen
+
+InfraSvc --> DB : CRUD Recintos/Equipos
+ReserSvc --> DB : Persiste asignaciones
+ConsultaSvc --> Cache : Lectura rápida
+ConsultaSvc --> DB : Consulta catálogo/horarios
+
+ReserSvc --> Queue : Publica evento de reserva
+Queue --> NotifSvc : Consume evento
+
+@enduml
+```
+
+![Diagrama de Componentes del Módulo 8. Aulas](resources/imgs/m8_Aulas_componentes.png)
+
+## Descripción
+
+- **Clientes / Usuarios:** Agrupa la interfaz de usuario (*Front-End*) y los módulos externos (*Alumnos*, *Inscripciones* y *Calendario de Exámenes*) que consumen los servicios del módulo mediante interfaces REST.
+- **API Backend (Servicios de Aulas):**
+  - *Servicio de Infraestructura (`infraSvc1`):* Expone la interfaz `IInfraestructura` para proveer el catálogo de recintos, capacidades y equipamiento al resto de componentes, además de gestionar su CRUD en base de datos.
+  - *Servicio de Asignación y Reservas (`reserSvc1`):* Orquesta las solicitudes de reserva y modificación, consumiendo `IInfraestructura` e `IValidacion` antes de persistir cambios y publicar eventos.
+  - *Validador de Disponibilidad y Aforo (`validSvc1`):* Expone `IValidacion` para ejecutar en tiempo real la detección de traslapes y verificación de aforo.
+  - *Servicio de Consulta de Espacios (`consultaSvc1`):* Atiende consultas de horarios y disponibilidad leyendo primero desde la *Caché de Horarios* y respaldándose en la base de datos.
+- **Persistencia y Mensajería:** Contiene la *Base de Datos de Infraestructura*, la *Caché de Horarios*, la *Cola de Eventos* y el *Servicio de Notificaciones* para el procesamiento asíncrono tras confirmar o modificar una asignación.
+
+---
+
+## Diagrama de Estados
+
+```plantuml
+@startuml Modulo8_Aulas_Estados
+title Diagrama de Estados - Ciclo de Vida de una Asignación / Reserva de Aula
+
+skinparam shadowing false
+skinparam state {
+    BackgroundColor #F8F9FA
+    BorderColor #343A40
+    ArrowColor #212529
+}
+
+[*] --> Solicitada : Nueva solicitud de espacio\n(Profesor, Coordinador o Módulo Externo)
+
+state Solicitada {
+    Solicitada : **entry /** Registrar datos (fecha, bloque, aforo, recursos)
+}
+
+Solicitada --> ValidandoDisponibilidad : Iniciar verificación automática (UC7)
+
+state ValidandoDisponibilidad as "Validando Disponibilidad y Aforo" {
+    ValidandoDisponibilidad : **do /** Verificar traslapes de horario (RF-03)
+    ValidandoDisponibilidad : **do /** Verificar capacidad máxima / aforo (RF-04)
+}
+
+ValidandoDisponibilidad --> Rechazada : [Conflicto de horario O sobrecupo]
+ValidandoDisponibilidad --> Asignada : [Aula libre Y aforo válido (< 5s)]
+
+state Rechazada {
+    Rechazada : **entry /** Notificar motivo de rechazo\n(empalme o falta de cupo)
+}
+Rechazada --> [*]
+
+state Asignada {
+    Asignada : **entry /** Bloquear bloque horario en BD\n**entry /** Actualizar caché y publicar evento
+}
+
+Asignada --> ValidandoDisponibilidad : Modificar parámetros (UC8)\n[Cambio de horario, aula o grupo]
+Asignada --> Cancelada : Cancelar asignación (UC8)\n[Liberar aula]
+Asignada --> Activa : Llega fecha y hora de inicio
+
+state Activa {
+    Activa : **entry /** Espacio en uso\n(Clase regular, examen o evento)
+}
+
+Activa --> Cancelada : Suspensión extraordinaria /\nLiberación anticipada
+Activa --> Completada : Finaliza el bloque horario
+
+state Cancelada {
+    Cancelada : **entry /** Liberar bloque horario en BD\n**entry /** Notificar liberación de espacio
+}
+Cancelada --> [*]
+
+state Completada {
+    Completada : **entry /** Registrar historial de uso\n**entry /** Liberar aula para futuras asignaciones
+}
+Completada --> [*]
+
+@enduml
+```
+
+![Diagrama de Estados del Módulo 8. Aulas](resources/imgs/m8_Aulas_estados.png)
+
+## Descripción
+
+- **Solicitada:** Estado inicial que registra la petición de espacio proveniente de un docente, coordinador o módulo externo (**UC3** / **UC6**).
+- **Validando Disponibilidad y Aforo:** Ejecuta automáticamente en menos de 5 segundos (**RNF-01**) las comprobaciones de traslape de horario (**RF-03**) y capacidad máxima (**RF-04**) (**UC7**).
+- **Rechazada:** Estado final al que transita la solicitud si existe empalme de horario o sobrecupo, notificando el motivo al solicitante.
+- **Asignada:** Confirma la reserva, bloquea el horario en base de datos, actualiza la caché y dispara la notificación asíncrona. Desde aquí puede regresar a validación si se modifican sus parámetros (**UC8**), pasar a *Cancelada* o iniciar su ejecución.
+- **Activa:** Representa el uso efectivo del aula durante el bloque horario programado para la clase, examen o evento.
+- **Cancelada:** Estado final alcanzado cuando se libera el espacio antes o durante la actividad (**UC8**), dejando el aula disponible nuevamente.
+- **Completada:** Estado final tras concluir el bloque horario programado, registrando el historial de uso y liberando el recinto para futuras asignaciones.
