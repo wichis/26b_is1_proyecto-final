@@ -3,7 +3,9 @@
 Puntos: 70 puntos
 
 [ ] Coherencia.- Lo explicado y lo redactado, son veridicos.
+
 [ ] Consistencia.- Respeta la estructura del documento asi como completa todas las secciones.
+
 [ ] Contribucion.- Participacion trabajo documental.
 
 [ ] Diagramas de casos de uso
@@ -13,3 +15,10 @@ Puntos: 70 puntos
 [ ] Diagramas de estados
 [ ] Diagramas de herencia de actores
 [ ] Diagramas de 
+
+Formatos de entrega
+[ ] Formatos de entrega homogeneos.[1]
+
+
+Referencias
+[1] El 
