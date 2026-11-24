@@ -42,7 +42,7 @@ Un **actor** es quien usa el módulo desde fuera. Aquí se define quién es cada
 
 Un **diagrama de casos de uso** muestra qué puede hacer cada actor en el módulo. Cada óvalo es un caso de uso; `<<include>>` indica un paso que siempre se ejecuta dentro de otro caso.
 
-Código fuente: [casos_uso.puml](./resources/uml/m9_catalogo_examenes/casos_uso.puml)
+Código fuente: [casos_uso.puml](./uml/m9_catalogo_examenes/casos_uso.puml)
 
 ![Diagrama de casos de uso de Catálogo de Exámenes](./resources/imgs/m9_catalogo_examenes_casos_uso.png)
 
@@ -72,13 +72,13 @@ Los **diagramas de contexto** ubican al módulo dentro del sistema de Control Es
 
 Código fuente: [e6_m9_catalogo_examenes_contexto_nivel1.uml](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel1.uml)
 
-![Contexto nivel 1 de Catálogo de Exámenes](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel1.png)
+![Contexto nivel 1 de Catálogo de Exámenes](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel1.svg)
 
 ### Nivel 2
 
 Código fuente: [e6_m9_catalogo_examenes_contexto_nivel2.uml](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel2.uml)
 
-![Contexto nivel 2 de Catálogo de Exámenes](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel2.png)
+![Contexto nivel 2 de Catálogo de Exámenes](../docs/architecture/diagrams/e6_m9_catalogo_examenes_contexto_nivel2.svg)
 
 ## Diagrama de componentes
 
@@ -86,27 +86,27 @@ Un **diagrama de componentes** muestra las piezas de software que participan en 
 
 ### UC01 · Registrar tipo de examen
 
-Participan la formulario de tipo de examen, el servicio de catálogo, el componente «Validación de clave única» y la base de datos.
+Participan el formulario de tipo de examen, el servicio de catálogo, el componente «Validación de clave única» y la base de datos.
 
-Código fuente: [uc01_registrar_tipo_componentes.puml](./resources/uml/m9_catalogo_examenes/uc01_registrar_tipo_componentes.puml)
+Código fuente: [uc01_registrar_tipo_componentes.puml](./uml/m9_catalogo_examenes/uc01_registrar_tipo_componentes.puml)
 
-![Diagrama de componentes de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_componentes.png)
+![Diagrama de componentes de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_componentes.svg)
 
 ### UC02 · Modificar o desactivar tipo de examen
 
-Participan la formulario de tipo de examen, el servicio de catálogo, el Módulo Calendario de exámenes (interfaz «Exámenes programados») y la base de datos.
+Participan el formulario de tipo de examen, el servicio de catálogo, el Módulo Calendario de exámenes (interfaz «Exámenes programados») y la base de datos.
 
-Código fuente: [uc02_modificar_desactivar_tipo_componentes.puml](./resources/uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_componentes.puml)
+Código fuente: [uc02_modificar_desactivar_tipo_componentes.puml](./uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_componentes.puml)
 
-![Diagrama de componentes de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_componentes.png)
+![Diagrama de componentes de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_componentes.svg)
 
 ### UC03 · Consultar catálogo de exámenes
 
 Participan la pantalla del catálogo, el servicio de catálogo, el Módulo Registro de calificaciones (interfaz «Tipos y requisitos») y la base de datos.
 
-Código fuente: [uc03_consultar_catalogo_componentes.puml](./resources/uml/m9_catalogo_examenes/uc03_consultar_catalogo_componentes.puml)
+Código fuente: [uc03_consultar_catalogo_componentes.puml](./uml/m9_catalogo_examenes/uc03_consultar_catalogo_componentes.puml)
 
-![Diagrama de componentes de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_componentes.png)
+![Diagrama de componentes de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_componentes.svg)
 
 ## Diagrama de secuencia
 
@@ -116,25 +116,25 @@ Un **diagrama de secuencia** muestra, en orden y numerados, los mensajes que se 
 
 Lo inicia: **Personal de Control Escolar**. Validación: ¿La clave es nueva? Si no se cumple, el sistema responde «Ya existe un tipo con esa clave» y no guarda nada.
 
-Código fuente: [uc01_registrar_tipo_secuencia.puml](./resources/uml/m9_catalogo_examenes/uc01_registrar_tipo_secuencia.puml)
+Código fuente: [uc01_registrar_tipo_secuencia.puml](./uml/m9_catalogo_examenes/uc01_registrar_tipo_secuencia.puml)
 
-![Diagrama de secuencia de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_secuencia.png)
+![Diagrama de secuencia de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_secuencia.svg)
 
 ### UC02 · Modificar o desactivar tipo de examen
 
 Lo inicia: **Personal de Control Escolar**. Validación: ¿No tiene exámenes programados? Si no se cumple, el sistema responde «El tipo tiene exámenes programados; inténtalo cuando se apliquen» y no guarda nada.
 
-Código fuente: [uc02_modificar_desactivar_tipo_secuencia.puml](./resources/uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_secuencia.puml)
+Código fuente: [uc02_modificar_desactivar_tipo_secuencia.puml](./uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_secuencia.puml)
 
-![Diagrama de secuencia de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_secuencia.png)
+![Diagrama de secuencia de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_secuencia.svg)
 
 ### UC03 · Consultar catálogo de exámenes
 
-Lo inicia: **Profesor / Alumno**. Validación: ¿Hay tipos activos? Si no se cumple, el sistema responde «No hay tipos de examen registrados» y no guarda nada.
+Lo inicia: **Profesor / Alumno**. Validación: ¿Hay tipos activos? Si no se cumple, el sistema responde «No hay tipos de examen registrados»; la consulta no modifica datos.
 
-Código fuente: [uc03_consultar_catalogo_secuencia.puml](./resources/uml/m9_catalogo_examenes/uc03_consultar_catalogo_secuencia.puml)
+Código fuente: [uc03_consultar_catalogo_secuencia.puml](./uml/m9_catalogo_examenes/uc03_consultar_catalogo_secuencia.puml)
 
-![Diagrama de secuencia de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_secuencia.png)
+![Diagrama de secuencia de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_secuencia.svg)
 
 ## Diagrama de actividades
 
@@ -144,25 +144,25 @@ Un **diagrama de actividades** muestra el flujo de trabajo de un caso de uso, pa
 
 Carriles: **Personal de Control Escolar** y el sistema. Decisión: ¿La clave es nueva? Si la respuesta es «no», el flujo termina con el aviso «Ya existe un tipo con esa clave».
 
-Código fuente: [uc01_registrar_tipo_actividades.puml](./resources/uml/m9_catalogo_examenes/uc01_registrar_tipo_actividades.puml)
+Código fuente: [uc01_registrar_tipo_actividades.puml](./uml/m9_catalogo_examenes/uc01_registrar_tipo_actividades.puml)
 
-![Diagrama de actividades de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_actividades.png)
+![Diagrama de actividades de UC01](./resources/imgs/m9_catalogo_examenes/uc01_registrar_tipo_actividades.svg)
 
 ### UC02 · Modificar o desactivar tipo de examen
 
 Carriles: **Personal de Control Escolar** y el sistema. Decisión: ¿No tiene exámenes programados? Si la respuesta es «no», el flujo termina con el aviso «El tipo tiene exámenes programados; inténtalo cuando se apliquen».
 
-Código fuente: [uc02_modificar_desactivar_tipo_actividades.puml](./resources/uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_actividades.puml)
+Código fuente: [uc02_modificar_desactivar_tipo_actividades.puml](./uml/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_actividades.puml)
 
-![Diagrama de actividades de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_actividades.png)
+![Diagrama de actividades de UC02](./resources/imgs/m9_catalogo_examenes/uc02_modificar_desactivar_tipo_actividades.svg)
 
 ### UC03 · Consultar catálogo de exámenes
 
 Carriles: **Profesor / Alumno** y el sistema. Decisión: ¿Hay tipos activos? Si la respuesta es «no», el flujo termina con el aviso «No hay tipos de examen registrados».
 
-Código fuente: [uc03_consultar_catalogo_actividades.puml](./resources/uml/m9_catalogo_examenes/uc03_consultar_catalogo_actividades.puml)
+Código fuente: [uc03_consultar_catalogo_actividades.puml](./uml/m9_catalogo_examenes/uc03_consultar_catalogo_actividades.puml)
 
-![Diagrama de actividades de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_actividades.png)
+![Diagrama de actividades de UC03](./resources/imgs/m9_catalogo_examenes/uc03_consultar_catalogo_actividades.svg)
 
 ## Diagramas de estados
 
@@ -172,17 +172,21 @@ Un **diagrama de estados** muestra por qué situaciones pasa un objeto durante s
 
 Un tipo de examen nunca se borra: se desactiva para que deje de usarse y se puede volver a activar.
 
-Código fuente: [estados_tipo_examen.puml](./resources/uml/m9_catalogo_examenes/estados_tipo_examen.puml)
+Código fuente: [estados_tipo_examen.puml](./uml/m9_catalogo_examenes/estados_tipo_examen.puml)
 
-![Estados del tipo de examen](./resources/imgs/m9_catalogo_examenes/estados_tipo_examen.png)
+![Estados del tipo de examen](./resources/imgs/m9_catalogo_examenes/estados_tipo_examen.svg)
 
 ### Requisitos del tipo de examen
 
-Los requisitos (asistencia mínima, calificación aprobatoria y oportunidades) se pueden cambiar mientras no haya exámenes programados con ese tipo; cuando el Calendario programa uno, quedan bloqueados para no cambiar las reglas a mitad del periodo (ver UC02).
+Este diagrama complementa el ciclo de vida de TipoExamen y explica la regla de validación de UC02 (RF-02 y RF-03). Modela la **disponibilidad de edición del conjunto de requisitos** (asistencia mínima, calificación aprobatoria y oportunidades), no el ciclo de vida de una entidad independiente. Es una condición derivada de los exámenes pendientes del tipo, consultados en el módulo Calendario de Exámenes; no requiere un atributo de estado adicional.
 
-Código fuente: [estados_requisitos.puml](./resources/uml/m9_catalogo_examenes/estados_requisitos.puml)
+- **Editables:** no existen exámenes pendientes del tipo; Control Escolar puede modificar sus requisitos.
+- **Bloqueados:** existe al menos un examen pendiente del tipo; UC02 impide modificar los requisitos para mantener las condiciones de evaluación.
+- El conjunto vuelve a ser editable cuando se aplica el último examen pendiente. El estado Activo/Inactivo de TipoExamen es independiente de esta condición.
 
-![Estados de los requisitos del tipo de examen](./resources/imgs/m9_catalogo_examenes/estados_requisitos.png)
+Código fuente: [estados_requisitos.puml](./uml/m9_catalogo_examenes/estados_requisitos.puml)
+
+![Estados de los requisitos del tipo de examen](./resources/imgs/m9_catalogo_examenes/estados_requisitos.svg)
 
 ## Diagrama de clases
 
@@ -224,12 +228,12 @@ Son las mismas claves que usa el módulo Calendario de Exámenes.
 1. La clave no se puede repetir.
 2. La asistencia mínima va de 0 a 100 %, la calificación aprobatoria de 0 a 10 y debe haber al menos una oportunidad.
 3. Un tipo de examen no se borra: se desactiva.
-4. No se puede desactivar un tipo que tenga exámenes programados en el Calendario.
+4. No se puede modificar ni desactivar un tipo que tenga exámenes pendientes en el Calendario (UC02).
 5. Calendario y Registro de Calificaciones solo usan tipos activos.
 
 ### Modelo entidad-relación
 
-La tabla `tipo_examen` de este módulo están en el modelo entidad-relación del Equipo 6, junto al diagrama de clases, en el README, sección [5.1 Diagramas UML](../README.md#51-diagramas-uml-casos-de-uso-clases-secuencia-etc).
+La tabla `tipo_examen` de este módulo está en el modelo entidad-relación del Equipo 6, junto al diagrama de clases, en el README, sección [5.1 Diagramas UML](../README.md#51-diagramas-uml-casos-de-uso-clases-secuencia-etc).
 
 ## Glosario y Abreviaturas
 - **Tipo de examen:** Clase de evaluación (parcial, ordinario, extraordinario o título de suficiencia).

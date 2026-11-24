@@ -1,0 +1,18 @@
+@startuml
+title Módulo de Catálogo de Exámenes
+left to right direction
+actor "Personal de Control Escolar" as CE
+actor Profesor as P
+actor Alumno as A
+rectangle "Módulo de Catálogo de Exámenes" {
+  usecase "Registrar tipo de examen" as UC01
+  usecase "Modificar o desactivar tipo de examen" as UC02
+  usecase "Consultar catálogo de exámenes" as UC03
+  usecase "Validar clave única" as UC04
+}
+CE -- UC01
+CE -- UC02
+P -- UC03
+A -- UC03
+UC01 ..> UC04 : <<include>>
+@enduml

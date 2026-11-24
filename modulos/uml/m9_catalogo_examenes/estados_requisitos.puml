@@ -1,6 +1,6 @@
 @startuml
 !pragma layout smetana
-title Estados de los Requisitos de un tipo de examen
+title M9 - Disponibilidad de edición de requisitos (UC02)
 skinparam shadowing false
 skinparam defaultFontName Arial
 skinparam defaultFontSize 13
@@ -35,11 +35,19 @@ skinparam classBackgroundColor #EAF2FB
 skinparam classBorderColor #2F5D8A
 skinparam noteBackgroundColor #FFF7E6
 skinparam noteBorderColor #B7791F
-state "Definidos" as Definidos
-state "En uso" as EnUso
-[*] --> Definidos : se registra el tipo de examen\ncon sus requisitos
-Definidos --> Definidos : Control Escolar los modifica
-Definidos --> EnUso : el Calendario programa\nun examen de este tipo
-EnUso --> Definidos : ya se aplicaron todos\nlos exámenes programados
-note right of EnUso : Bloqueados: no se pueden\ncambiar mientras haya\nexámenes programados.
+state "Editables" as Editables
+state "Bloqueados" as Bloqueados
+[*] --> Editables : registrar tipo de examen
+Editables --> Editables : modificar requisitos [sin exámenes pendientes]
+Editables --> Bloqueados : Calendario programa un examen del tipo
+Bloqueados --> Editables : aplicar examen [no quedan exámenes pendientes]
+note right of Bloqueados
+  No se permite modificar requisitos
+  mientras exista al menos un examen pendiente.
+end note
+note bottom of Editables
+  Condición derivada de los exámenes programados;
+  no es un estado persistente de un requisito individual.
+  Aplica al conjunto de requisitos de TipoExamen (UC02).
+end note
 @enduml

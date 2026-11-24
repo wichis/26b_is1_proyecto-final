@@ -1,0 +1,23 @@
+@startuml e6_m9_catalogo_examenes_contexto_nivel2
+title Nivel 2 - Procesos del Módulo Catálogo de Exámenes
+actor "Personal de Control Escolar" as CE
+actor Profesor as P
+actor Alumno as A
+rectangle "1. Registrar tipo (UC01)" as P1
+rectangle "2. Modificar o desactivar (UC02)" as P2
+rectangle "3. Consultar catálogo (UC03)" as P3
+database "D1 Tipo de examen y requisitos" as D1
+rectangle "Módulo Calendario de Exámenes" as CAL #F2F4F4
+rectangle "Módulo Registro de Calificaciones" as RC #F2F4F4
+CE --> P1 : clave, nombre y requisitos
+CE --> P2 : cambios o desactivación
+P --> P3 : consulta
+A --> P3 : consulta
+P1 --> D1 : validar clave y registrar
+P2 --> D1 : guardar cambios sin borrar
+D1 --> P3 : tipos activos y requisitos
+P2 --> CAL : consultar exámenes programados
+CAL --> P2 : respuesta
+P3 --> CAL : tipos activos y requisitos
+P3 --> RC : tipos activos y requisitos
+@enduml

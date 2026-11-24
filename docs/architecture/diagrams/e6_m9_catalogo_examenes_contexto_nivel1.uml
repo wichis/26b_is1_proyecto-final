@@ -1,0 +1,16 @@
+@startuml e6_m9_catalogo_examenes_contexto_nivel1
+title Nivel 1 - Módulo Catálogo de Exámenes
+left to right direction
+actor "Personal de Control Escolar" as CE
+actor Profesor as P
+actor Alumno as A
+rectangle "Módulo Catálogo de Exámenes" as M #D6EAF8
+rectangle "Módulo Calendario de Exámenes" as CAL #F2F4F4
+rectangle "Módulo Registro de Calificaciones" as RC #F2F4F4
+CE --> M : alta, modificación y desactivación
+P --> M : consulta
+A --> M : consulta
+M --> CAL : tipos activos y requisitos
+CAL --> M : exámenes programados del tipo
+M --> RC : tipos activos y requisitos
+@enduml
