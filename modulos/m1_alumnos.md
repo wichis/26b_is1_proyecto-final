@@ -127,7 +127,7 @@ Los archivos fuente PlantUML se almacenan en `uml/` y se referencian junto a cad
 
 ### 6.1. Diagrama de Casos de Uso
 
-![Diagrama de Casos de Uso](resources/imgs/Caso_de_Uso_Alumnos.png)
+![Diagrama de Casos de Uso](resources/imgs/Caso_de_usos_modulo_Alumnos.png)
 
 - Fuente UML: `uml/Casos_de_uso.uml`
 
@@ -140,93 +140,93 @@ Los archivos fuente PlantUML se almacenan en `uml/` y se referencian junto a cad
 ### 6.3. Diagramas de Secuencia
 
 #### UC1: Iniciar sesión
-![Diagrama de Secuencia](resources/imgs/UC01_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC1_Inicio_de_Sesion_Alumnos.png)
 - Fuente UML: `uml/D_A_Inicio.uml`
 
 #### UC2: Editar datos generales
-![Diagrama de Secuencia](resources/imgs/UC02_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC2_Editar_datos_generales_MAlumnos.png)
 - Fuente UML: `uml/D_A_Editar.uml`
 
 #### UC3: Iniciar reinscripción
-![Diagrama de Secuencia](resources/imgs/UC03_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC3_inciar_Reincripcion_MAlumnos.png)
 - Fuente UML: `uml/D_A_Rincripcion.uml`
 
 #### UC4: Consultar datos personales
-![Diagrama de Secuencia](resources/imgs/UC04_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC4_Consultar_Datos_Personales_MAlumnos.png)
 - Fuente UML: `uml/D_A_Consultar.uml`
 
 #### UC5: Consultar calificaciones
-![Diagrama de Secuencia](resources/imgs/UC05_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC5_Consultar_Calificaciones_Alumnos.png)
 - Fuente UML: `uml/calificaciones.uml`
 
 #### UC6: Consultar historial académico
-![Diagrama de Secuencia](resources/imgs/UC06_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC6_Consultar_Historial_Academico_Alumnos.png)
 - Fuente UML: `uml/historial.uml`
 
 #### UC7: Consultar horario
-![Diagrama de Secuencia](resources/imgs/UC07_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC7_Consultar_Horario_Alumnos.png)
 - Fuente UML: `uml/horario.uml`
 
 #### UC8: Consultar materias inscritas
-![Diagrama de Secuencia](resources/imgs/UC08_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC8_Consultar_Materias_Inscritas_Alumnos.png)
 - Fuente UML: `uml/materias.uml`
 
 #### UC9: Descargar constancia de estudios
-![Diagrama de Secuencia](resources/imgs/UC09_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC9_Descargar_Constancia_de_Estudios_Alumnos.png)
 - Fuente UML: `uml/constancia.uml`
 
 #### UC10: Cambiar contraseña
-![Diagrama de Secuencia](resources/imgs/UC010_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC10_Cambiar_Contraseña_Alumnos.png)
 - Fuente UML: `uml/contraseña.uml`
 
 #### UC11: Consultar estado de reinscripción
-![Diagrama de Secuencia](resources/imgs/UC011_Alumnos.png)
+![Diagrama de Secuencia](resources/imgs/UC11_Cambiar_Estado_de_Reinscripcion_Alumnos.png)
 - Fuente UML: `uml/estado.uml`
 
 ### 6.6. Diagramas de Actividades
 
 #### UC1: Iniciar sesión
-![Diagrama de Actividades](resources/imgs/UC1_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC01_DA_Incio_Secion_Alumnos.png)
 - Fuente UML: `uml/UC01.uml`
 
 #### UC2: Editar datos generales
-![Diagrama de Actividades](resources/imgs/UC2_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC02_DA_Editar_datos_Generales_Alumnos.png)
 - Fuente UML: `uml/UC02.uml`
 
 #### UC3: Iniciar reinscripción
-![Diagrama de Actividades](resources/imgs/UC3_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC03_DA_Iniciar_Reinscripcion_Alumnos.png)
 - Fuente UML: `uml/UC03.uml`
 
 #### UC4: Consultar datos personales
-![Diagrama de Actividades](resources/imgs/UC4_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC04_DA_Iniciar_Reinscripcion_Alumnos.png)
 - Fuente UML: `uml/UC04.uml`
 
 #### UC5: Consultar calificaciones
-![Diagrama de Actividades](resources/imgs/UC5_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC05_DA_Consultar_Calificaciones_Alumnos.png)
 - Fuente UML: `uml/UC05.uml`
 
 #### UC6: Consultar historial académico
-![Diagrama de Actividades](resources/imgs/UC6_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC06_DA_Consultar_Historial_Academico_Alumnos.png)
 - Fuente UML: `uml/UC06.uml`
 
 #### UC7: Consultar horario
-![Diagrama de Actividades](resources/imgs/UC7_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC07_DA_Consultar_Horario_Alumnos.png)
 - Fuente UML: `uml/UC07.uml`
 
 #### UC8: Consultar materias inscritas
-![Diagrama de Actividades](resources/imgs/UC8_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC08_DA_Consultar_Mataterias_Inscritas_Alumnos.png)
 - Fuente UML: `uml/UC08.uml`
 
 #### UC9: Descargar constancia de estudios
-![Diagrama de Actividades](resources/imgs/UC9_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC09_DA_Descargar_Costancia_de_Estudio_Alumnos.png)
 - Fuente UML: `uml/UC09.uml`
 
 #### UC10: Cambiar contraseña
-![Diagrama de Actividades](resources/imgs/UC10_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC010_DA_Cambiar_Contraseña_Alumnos.png)
 - Fuente UML: `uml/UC10.uml`
 
 #### UC11: Consultar estado de reinscripción
-![Diagrama de Actividades](resources/imgs/UC11_Alumnos.png)
+![Diagrama de Actividades](resources/imgs/UC011_DA_Consultar_Estado_de_Reinscripcion_Alumnos.png)
 - Fuente UML: `uml/UC11.uml`
 
 ### 6.7. Diagramas de Estados
@@ -236,7 +236,7 @@ Los archivos fuente PlantUML se almacenan en `uml/` y se referencian junto a cad
 - Fuente UML: `uml/Diagrama_de_estados.uml`
 
 #### Sesión del Alumno
-![Diagrama de Estados](resources/imgs/Segundo_Diagrama_de_Estados_Alumnos.png)
+![Diagrama de Estados](resources/imgs/Segundo_Diagrama_de_Estados_Modulo_Alumnos.png)
 - Fuente UML: `uml/segundodiagrama.uml`
 
 ---

@@ -1,0 +1,19 @@
+@startuml
+title Diagrama de Estados - Alumno (Módulo 1)
+
+[*] --> Registrado : Alta en el sistema
+
+Registrado --> Inscrito : Inscripción validada
+Registrado --> BajaDefinitiva : Cancelación de registro / baja
+
+Inscrito --> BajaTemporal : Solicitud de baja temporal / suspensión
+BajaTemporal --> Inscrito : Reincorporación / fin de suspensión
+
+Inscrito --> Egresado : Créditos concluidos / egreso
+Inscrito --> BajaDefinitiva : Baja definitiva
+
+BajaTemporal --> BajaDefinitiva : Baja definitiva
+
+Egresado --> [*]
+BajaDefinitiva --> [*]
+@enduml
