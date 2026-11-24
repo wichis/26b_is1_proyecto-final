@@ -1,0 +1,59 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+skinparam state {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+skinparam class {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+
+title Profesores: estados de una solicitud de actualización
+
+hide empty description
+state "En edición" as Edicion
+state "Validando" as Validando
+state "Guardando" as Guardando
+state "Confirmada" as Confirmada
+state "Rechazada" as Rechazada
+state "Cancelada" as Cancelada
+[*] --> Edicion : abrir modificación UC3 / UC6
+Edicion --> Validando : enviar cambios
+Validando --> Edicion : datos inválidos o duplicados\n/ mostrar correcciones necesarias
+Validando --> Edicion : consulta no disponible\n/ informar y permitir reintento
+Validando --> Rechazada : permiso insuficiente\n/ no aplicar cambios
+Validando --> Guardando : datos válidos y permitidos
+Guardando --> Confirmada : guardado correcto\n/ informar actualización
+Guardando --> Edicion : guardado no confirmado\n/ informar; verificar el estado antes de reintentar
+Edicion --> Cancelada : cancelar edición\n/ descartar cambios no enviados
+Confirmada --> [*]
+Rechazada --> [*]
+Cancelada --> [*]
+note bottom of Edicion
+ Solicitud transitoria de actualización.
+ No crea un trámite administrativo adicional
+ ni una entidad persistente obligatoria.
+end note
+@enduml

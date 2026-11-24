@@ -121,5 +121,5 @@ Prof -- UC6
 | RNF-07 | Disponibilidad | El módulo debe estar disponible durante el horario de operación de la institución. (*) |
 
 ## 8. Modelado detallado
-
+- [Bloque B: modificar datos y dar de baja profesores](profesores/bloque_b.md). Incluye contexto, fuentes UML e imágenes de cinco diagramas.
 - [Bloque C: consultar y actualizar el perfil propio de profesores](profesores/bloque_c.md). Incluye contexto, fuentes UML e imágenes de cinco diagramas.

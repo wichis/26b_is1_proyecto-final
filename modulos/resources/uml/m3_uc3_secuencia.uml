@@ -1,0 +1,99 @@
+@startuml
+skinparam defaultFontName Arial
+skinparam defaultFontSize 15
+skinparam shadowing false
+skinparam backgroundColor #FFFFFF
+skinparam ArrowColor #42556A
+skinparam BorderColor #42556A
+skinparam dpi 150
+skinparam roundcorner 8
+skinparam sequence {
+  ParticipantBackgroundColor #F1F4F7
+  ParticipantBorderColor #42556A
+  LifeLineBorderColor #7B8794
+  ActorBorderColor #42556A
+  GroupBackgroundColor #FAFBFC
+  GroupHeaderFontColor #253746
+}
+skinparam activity {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+  DiamondBackgroundColor #FFFFFF
+  DiamondBorderColor #42556A
+}
+skinparam state {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+skinparam class {
+  BackgroundColor #F1F4F7
+  BorderColor #42556A
+}
+
+title UC3. Modificar datos del profesor: secuencia
+
+hide footbox
+skinparam sequenceMessageAlign center
+actor "Administrador escolar" as Actor
+boundary "Vista de\nProfesores" as Vista
+control "Control de\nProfesores" as Control
+participant "Acceso\ncompartido" as Acceso
+database "Registro de\nprofesores" as Registro
+
+Actor -> Vista : Seleccionar profesor y enviar cambios
+Vista -> Control : modificarProfesor(profesorId, cambios)
+Control -> Acceso : comprobarAcceso(operación, sesión)
+Acceso --> Control : permiso
+alt acceso no autorizado
+  Control --> Vista : acceso rechazado
+  Vista --> Actor : informar rechazo
+else acceso autorizado
+  Control -> Registro : obtenerProfesor(profesorId)
+  alt fallo de lectura
+    Registro --> Control : error de consulta
+    Control --> Vista : consulta no disponible
+    Vista --> Actor : informar fallo sin modificar
+  else registro inexistente
+    Registro --> Control : ausencia
+    Control --> Vista : profesor no encontrado
+    Vista --> Actor : informar ausencia
+  else registro existente
+    Registro --> Control : datos actuales
+    Control -> Control : validarCamposYDatos(cambios)
+    alt datos inválidos o campos no permitidos
+      Control --> Vista : cambios rechazados
+      Vista --> Actor : mostrar motivo, sin guardar
+    else datos válidos y permitidos
+      Control -> Registro : buscarDuplicadoExcluyendo(profesorId)
+      alt fallo al consultar duplicados
+        Registro --> Control : error de consulta
+        Control --> Vista : consulta no disponible
+        Vista --> Actor : informar fallo sin guardar
+      else consulta correcta
+        Registro --> Control : coincidencia o ausencia
+        alt existe duplicado
+          Control --> Vista : cambios rechazados
+          Vista --> Actor : informar duplicado sin guardar
+        else no existe duplicado
+          Control -> Registro : actualizarDatos(profesorId, cambios)
+          alt guardado confirmado
+            Registro --> Control : actualización confirmada
+            Control --> Vista : confirmación
+            Vista --> Actor : mostrar datos actualizados
+          else fallo de guardado
+            Registro --> Control : operación no confirmada
+            Control --> Vista : error de actualización
+            Vista --> Actor : informar fallo sin confirmar cambios
+          end
+        end
+      end
+    end
+  end
+end
+
+note over Control, Registro
+  La regla exacta de duplicados está pendiente;
+  excluir siempre el profesor que se modifica.
+  La modificación no cambia su estado de baja.
+end note
+@enduml
