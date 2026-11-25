@@ -11,11 +11,11 @@ El administrador escolar da de alta a los profesores y consulta el listado de lo
 | UC1 | [Registrar profesor](uc1_registrar.md) | Administrador escolar |
 | UC2 | [Consultar profesores](uc2_consultar.md) | Administrador escolar |
 
-Cada caso enlaza su fuente UML y su imagen, e indica condiciones, resultados y alternativas. Las secuencias separan actor, interfaz, controlador, servicio y base de datos como responsabilidades lógicas propuestas; no fijan una tecnología ni prueban software implementado. UC1 incluye además un diagrama de estados del registro (Borrador, En validación, Registrado y Cancelado). UC2 representa la búsqueda o filtro opcional y el caso sin resultados.
+Cada caso enlaza su fuente UML y su imagen, e indica condiciones, resultados y alternativas. Las secuencias separan actor, Módulo Profesores (como punto de interacción del administrador), controlador, servicio y base de datos como responsabilidades lógicas propuestas; no fijan una tecnología ni prueban software implementado. UC1 incluye además un diagrama de estados del registro: el estado compuesto En proceso agrupa Borrador y En validación, y desde él se puede cancelar en cualquier momento antes de guardar; los demás estados son Registrado y Cancelado. La secuencia de UC1 contempla la cancelación deliberada y el intento de recargar la página con datos sin guardar (el módulo advierte antes de descartarlos y no se guarda nada en la base de datos). UC2 representa la búsqueda o filtro opcional y el caso sin resultados.
 
 ## Acuerdos pendientes
 
-Acordar con el bloque B los criterios de duplicado de UC1 (el diagrama usa correo o número de empleado) y los campos obligatorios del registro. Acordar con E1 los permisos del administrador escolar para registrar y consultar. Definir con el equipo qué criterios de búsqueda o filtro admite UC2. No declarar resueltas las reglas de validación por haberlas dibujado.
+Acordar con el bloque B los criterios de duplicado de UC1 (el diagrama usa correo o número de empleado) y los campos obligatorios del registro. Acordar con E1 los permisos del administrador escolar para registrar y consultar. Definir con el equipo qué criterios de búsqueda o filtro admite UC2. Acordar con el equipo el comportamiento ante la recarga o salida accidental de un formulario con datos sin guardar (la propuesta de UC1 es advertir al usuario; la alternativa sería un borrador local), para que todos los módulos lo traten igual. No declarar resueltas las reglas de validación por haberlas dibujado.
 
 ## Fuentes
 

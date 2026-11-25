@@ -1,34 +1,59 @@
 @startuml
-title Diagrama de secuencia - Registrar profesor
+title Diagrama de secuencia - UC1 Registrar profesor
+
 actor "Administrador escolar" as Admin
-participant "Interfaz web" as UI
-participant "ProfesorController" as Ctrl
-participant "ProfesorService" as Svc
-database "Base de datos" as DB
+participant "Módulo Profesores" as UI
+participant ProfesorController
+participant ProfesorService
+database "Base de datos" as BD
 
 Admin -> UI : Selecciona "Registrar profesor"
 UI --> Admin : Muestra formulario de registro
-Admin -> UI : Captura datos y presiona "Guardar"
-UI -> Ctrl : registrarProfesor(datos)
-Ctrl -> Svc : validarDatos(datos)
 
-alt Datos inválidos o incompletos
-    Svc --> Ctrl : Error de validación
-    Ctrl --> UI : Mensaje de error
+alt Cancela el registro
+  Admin -> UI : Presiona "Cancelar"
+  UI -> UI : Descarta datos capturados
+  UI --> Admin : Cierra el formulario y regresa a la pantalla anterior
+  note right of UI : No se invoca al controlador ni a la BD,\nno se guarda nada.
+
+else Intenta recargar la página antes de guardar
+  Admin -> UI : Recarga la página
+  UI --> Admin : Advierte "Hay datos sin guardar, ¿desea salir?"
+  alt Confirma salir
+    Admin -> UI : Confirma
+    UI -> UI : Descarta datos capturados
+    UI --> Admin : Muestra formulario vacío
+  else Decide quedarse
+    Admin -> UI : Cancela la recarga
+    UI --> Admin : Conserva el formulario con los datos capturados
+  end
+  note right of UI : No se guardó nada en la BD.
+
+else Captura datos y guarda
+  Admin -> UI : Captura datos y presiona "Guardar"
+  UI -> ProfesorController : registrarProfesor(datos)
+  ProfesorController -> ProfesorService : validarDatos(datos)
+
+  alt Datos inválidos o incompletos
+    ProfesorService --> ProfesorController : Error de validación
+    ProfesorController --> UI : Mensaje de error
     UI --> Admin : Muestra campos a corregir
-else Datos válidos
-    Svc -> DB : buscarProfesor(correo / número de empleado)
-    DB --> Svc : Resultado
+  else Datos válidos
+    ProfesorService -> BD : buscarProfesor(correo / número de empleado)
+    BD --> ProfesorService : Resultado
+
     alt Profesor ya existe
-        Svc --> Ctrl : Error: profesor duplicado
-        Ctrl --> UI : Mensaje de duplicado
-        UI --> Admin : Informa que ya está registrado
+      ProfesorService --> ProfesorController : Error: profesor duplicado
+      ProfesorController --> UI : Mensaje de duplicado
+      UI --> Admin : Informa que ya está registrado
+      note right of UI : Si se recarga y reenvía el formulario\ndespués de guardar, cae aquí y no se\nregistra dos veces.
     else Profesor nuevo
-        Svc -> DB : guardarProfesor(datos)
-        DB --> Svc : Registro creado (id)
-        Svc --> Ctrl : Registro exitoso
-        Ctrl --> UI : Confirmación
-        UI --> Admin : "Profesor registrado correctamente"
+      ProfesorService -> BD : guardarProfesor(datos)
+      BD --> ProfesorService : Registro creado (id)
+      ProfesorService --> ProfesorController : Registro exitoso
+      ProfesorController --> UI : Confirmación
+      UI --> Admin : "Profesor registrado correctamente"
     end
+  end
 end
 @enduml

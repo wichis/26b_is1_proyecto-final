@@ -10,12 +10,12 @@ Permite al administrador escolar ver el listado de profesores registrados y, opc
 
 ![Diagrama de secuencia: Consultar profesores](../resources/imgs/m3_uc2_secuencia.png)
 
-El administrador elige «Consultar profesores». La interfaz pide la lista al controlador, este al servicio y el servicio a la base de datos; el resultado se muestra en una tabla. De forma opcional, el administrador ingresa un nombre o filtro: el sistema repite la consulta con ese criterio y muestra los profesores encontrados o el mensaje «No se encontraron profesores».
+El administrador elige «Consultar profesores» en el Módulo Profesores. El módulo pide la lista al controlador, este al servicio y el servicio a la base de datos; el resultado se muestra en una tabla. De forma opcional, el administrador ingresa un nombre o filtro: el sistema repite la consulta con ese criterio y muestra los profesores encontrados o el mensaje «No se encontraron profesores».
 
 | Participante | Tipo | Responsabilidad lógica |
 |---|---|---|
 | Administrador escolar | Actor | Inicia la consulta e ingresa criterios. |
-| Interfaz web | Interfaz | Muestra la tabla y los mensajes. |
+| Módulo Profesores | Interfaz | Muestra la tabla y los mensajes. |
 | ProfesorController | Control | Recibe las solicitudes y las dirige al servicio. |
 | ProfesorService | Servicio | Aplica la búsqueda y el filtrado. |
 | Base de datos | Registro | Devuelve la información de profesores. |
