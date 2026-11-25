@@ -50,37 +50,11 @@ Centralizar y mantener actualizado el registro de profesores de la institución,
 
 ### Código fuente UML
 
-```plantuml
-@startuml
-title Diagrama de casos de uso - Módulo Profesores
-left to right direction
-
-actor "Administrador escolar" as Admin
-actor "Profesor" as Prof
-
-rectangle "Módulo Profesores" {
-    usecase "Registrar profesor" as UC1
-    usecase "Consultar profesores" as UC2
-    usecase "Modificar datos del profesor" as UC3
-    usecase "Dar de baja profesor" as UC4
-    usecase "Consultar perfil propio" as UC5
-    usecase "Actualizar datos personales" as UC6
-}
-
-Admin -- UC1
-Admin -- UC2
-Admin -- UC3
-Admin -- UC4
-
-Prof -- UC5
-Prof -- UC6
-
-@enduml
-```
+[Código fuente UML de los casos de uso](resources/uml/m3_casos_uso.uml)
 
 ### Imagen
 
-![Diagrama de casos de uso - Módulo Profesores](resources/imgs/m3_profesores_casos-de-uso.png)
+![Diagrama de casos de uso - Módulo Profesores](resources/imgs/m3_casos_uso.png)
 
 ### Descripción de casos de uso
 
@@ -122,4 +96,44 @@ Prof -- UC6
 
 ## 8. Modelado detallado
 
-- [Bloque C: consultar y actualizar el perfil propio de profesores](profesores/bloque_c.md). Incluye contexto, fuentes UML e imágenes de cinco diagramas.
+Los diagramas del bloque C se muestran a continuación con el enlace a su fuente UML. La [documentación complementaria del bloque C](profesores/bloque_c.md) desarrolla las condiciones y alternativas. Las secuencias representan responsabilidades lógicas propuestas, no servicios implementados.
+
+### UC5. Consultar perfil propio
+
+**Actor:** Profesor. **Requisitos de origen:** RF-06 y RNF-02.
+
+El perfil consultado se obtiene de la identidad de la sesión; no se acepta un identificador libre de otro profesor. Se distinguen acceso no autorizado, cuenta sin vínculo, vínculo sin registro y fallo de lectura.
+
+#### Diagrama de secuencia
+
+[Código fuente UML de la secuencia de UC5](resources/uml/m3_uc5_secuencia.uml)
+
+![UC5: secuencia para consultar el perfil propio](resources/imgs/m3_uc5_secuencia.png)
+
+#### Diagrama de actividades
+
+[Código fuente UML de las actividades de UC5](resources/uml/m3_uc5_actividades.uml)
+
+![UC5: actividades para consultar el perfil propio](resources/imgs/m3_uc5_actividades.png)
+
+### UC6. Actualizar datos personales
+
+**Actor:** Profesor. **Requisitos de origen:** RF-07, RF-02, RF-08 y RNF-02.
+
+La actualización se aplica únicamente al perfil vinculado a la sesión y a sus campos autorizados. Los diagramas contemplan datos inválidos, campos no permitidos, duplicados y fallos de lectura o guardado; una operación no confirmada no se presenta como exitosa.
+
+#### Diagrama de secuencia
+
+[Código fuente UML de la secuencia de UC6](resources/uml/m3_uc6_secuencia.uml)
+
+![UC6: secuencia para actualizar los datos personales](resources/imgs/m3_uc6_secuencia.png)
+
+#### Diagrama de actividades
+
+[Código fuente UML de las actividades de UC6](resources/uml/m3_uc6_actividades.uml)
+
+![UC6: actividades para actualizar los datos personales](resources/imgs/m3_uc6_actividades.png)
+
+### Acuerdos pendientes del bloque C
+
+El vínculo cuenta/perfil se valida con E1. Los campos y permisos de autoedición se acuerdan con E1 y E3, y el ciclo común de actualización se coordina con el bloque B. La inclusión de los diagramas no declara resueltos esos acuerdos.
