@@ -1,0 +1,73 @@
+@startuml Modulo8_Aulas_Completo
+title Módulo 8: Asignación de Aulas (Nivel 0 y Nivel 1)
+
+skinparam defaultTextAlignment center
+skinparam packageStyle rectangle
+skinparam shadowing false
+
+package "Nivel 0 (Contexto)" {
+    rectangle "Módulo de Alumnos" as modAlumnos0
+    rectangle "Módulo Calendario de Exámenes" as modExamenes0
+    rectangle "Módulo de Inscripciones" as modInscripciones0
+    rectangle "Administrador / Coordinador" as admin0
+
+    storage "Sistema de Gestión y\nAsignación de Aulas" as sistema0
+
+    admin0 --> sistema0 : Gestión de infraestructura y asignaciones
+    modAlumnos0 --> sistema0 : Consulta aula de horario / Valida aforo para cambio de grupo
+    modExamenes0 --> sistema0 : Solicitud de aula para evaluación
+    modInscripciones0 --> sistema0 : Solicitud de aula para clase regular
+
+    sistema0 --> modAlumnos0 : Detalle de espacio y confirmación de cupo
+    sistema0 --> modExamenes0 : Confirmación / Rechazo de aula libre
+    sistema0 --> modInscripciones0 : Confirmación / Rechazo de aula libre
+}
+
+package "Nivel 1 (Contenedores / Subsistemas)" {
+    rectangle "Administrador / Coordinador" as admin1
+    rectangle "Profesor / Alumno" as user1
+
+    rectangle "Módulo de Alumnos" as modAlumnos1
+    rectangle "Módulo Calendario de Exámenes" as modExamenes1
+    rectangle "Módulo de Inscripciones" as modInscripciones1
+
+    rectangle "Aplicación Web / Móvil\n(Front-End)" as app1
+
+    package "API Backend (Servicios de Aulas)" {
+        storage "Servicio de Gestión\nde Infraestructura" as infraSvc1
+        storage "Servicio de Asignación\ny Reservas" as reserSvc1
+        storage "Servicio de Consulta\nde Espacios" as consultaSvc1
+        storage "Validador de Disponibilidad\ny Aforo" as validSvc1
+    }
+
+    database "Cache de Horarios" as cache1
+    database "Base de Datos de Infraestructura" as db1
+    queue "Cola de Eventos" as queue1
+
+    storage "Servicio de Notificaciones" as notifSvc1
+
+    ' Conexiones de Actores e Interfaces
+    admin1 --> app1 : HTTP/S
+    user1 --> app1 : HTTP/S
+
+    app1 --> infraSvc1 : HTTP/REST
+    app1 --> reserSvc1 : HTTP/REST
+    app1 --> consultaSvc1 : HTTP/REST
+
+    ' Integración de Módulos Externos hacia el Backend
+    modAlumnos1 --> consultaSvc1 : HTTP/REST (Consulta aula / aforo)
+    modExamenes1 --> reserSvc1 : HTTP/REST (Reserva examen)
+    modInscripciones1 --> reserSvc1 : HTTP/REST (Reserva clase regular)
+
+    ' Lógica interna del Backend y Persistencia
+    reserSvc1 --> validSvc1
+    infraSvc1 --> db1
+    reserSvc1 --> db1
+    consultaSvc1 --> cache1
+    consultaSvc1 --> db1
+
+    ' Procesamiento Asíncrono
+    reserSvc1 --> queue1
+    queue1 --> notifSvc1
+}
+@enduml

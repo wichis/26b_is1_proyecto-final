@@ -88,11 +88,14 @@ Código fuente: [e6_er_calificaciones_catalogo.uml](./docs/architecture/diagrams
 # Índice de Módulos
 
 - [Módulo 1: Alumnos](./modulos/m1_alumnos.md)
-- 
 - [Módulo 2: Inscripciones](./modulos/modulo-inscripciones.md)
 - 
 - [Módulo 4: Asignaturas/Materias](./modulos/m4_asignaturas.md)
-
+- [Módulo 5: Calendario de Exámenes](./modulos/m5_calendarioExs.md)
+- 
+- 
+- [Módulo 8: Asignación de Aulas](./modulos/m8_Aulas.md)
+  
 ## Autenticación y autorización
 
 {TODO - tabla de aginacion de permisos roles versus modulos}

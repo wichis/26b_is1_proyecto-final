@@ -1,0 +1,67 @@
+@startuml Modulo8_Aulas_Componentes
+title Diagrama de Componentes - Módulo 8: Asignación de Aulas
+
+skinparam componentStyle uml2
+skinparam linetype ortho
+skinparam shadowing false
+skinparam defaultTextAlignment center
+
+package "Clientes / Usuarios" {
+    [Navegador Web / App Móvil] as FrontEnd
+    [Módulo de Alumnos] as ModAlumnos
+    [Módulo de Inscripciones] as ModInscripciones
+    [Módulo Calendario de Exámenes] as ModExamenes
+}
+
+component "Sistema de Gestión y Asignación de Aulas" {
+    
+    package "API Backend (Servicios de Aulas)" {
+        [Servicio de Infraestructura\n(infraSvc1)] as InfraSvc
+        [Servicio de Asignación y Reservas\n(reserSvc1)] as ReserSvc
+        [Validador de Disponibilidad y Aforo\n(validSvc1)] as ValidSvc
+        [Servicio de Consulta de Espacios\n(consultaSvc1)] as ConsultaSvc
+
+        interface "IValidacion" as IVal
+        interface "IInfraestructura" as IInf
+        
+        ValidSvc -up- IVal
+        InfraSvc -right- IInf
+        
+        ReserSvc ..> IVal : <<use>>
+        ReserSvc ..> IInf : <<use>>
+        ConsultaSvc ..> IInf : <<use>>
+    }
+
+    package "Persistencia y Mensajería" {
+        database "Base de Datos de\nInfraestructura" as DB
+        database "Caché de Horarios" as Cache
+        queue "Cola de Eventos" as Queue
+        [Servicio de Notificaciones] as NotifSvc
+    }
+}
+
+interface "API REST Infraestructura" as API_Infra
+interface "API REST Reservas" as API_Reser
+interface "API REST Consultas" as API_Cons
+
+InfraSvc -up- API_Infra
+ReserSvc -up- API_Reser
+ConsultaSvc -up- API_Cons
+
+FrontEnd ..> API_Infra : HTTP/S
+FrontEnd ..> API_Reser : HTTP/S
+FrontEnd ..> API_Cons : HTTP/S
+
+ModAlumnos ..> API_Cons : Consulta aula / aforo
+ModInscripciones ..> API_Reser : Reserva clase regular
+ModExamenes ..> API_Reser : Reserva examen
+
+InfraSvc --> DB : CRUD Recintos/Equipos
+ReserSvc --> DB : Persiste asignaciones
+ConsultaSvc --> Cache : Lectura rápida
+ConsultaSvc --> DB : Consulta catálogo/horarios
+
+ReserSvc --> Queue : Publica evento de reserva
+Queue --> NotifSvc : Consume evento
+
+@enduml

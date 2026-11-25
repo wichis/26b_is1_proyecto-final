@@ -66,173 +66,98 @@ El sistema deberá permitir al Administrador / Coordinador modificar o cancelar 
 
 ## Diagrama de casos de uso
 
-```plantuml
-@startuml
-left to right direction
-skinparam packageStyle rectangle
+El diagrama representa las interacciones entre los actores Alumno, Profesor y Administrador / Coordinador con las funciones del Módulo de Asignación de Aulas.
 
-actor Alumno
-actor Profesor
-actor "Administrador / Coordinador" as Admin
+**Código fuente UML:** [Ver diagrama de casos de uso](../docs/architecture/diagrams/e5_m8_aulas_casos_uso.uml)
 
-rectangle "MÓDULO DE ASIGNACIÓN DE AULAS" {
-  usecase "Consultar aulas y recursos\ndisponibles" as UC1
-  usecase "Consultar horarios y\nasignaciones de espacios" as UC2
-  usecase "Solicitar espacio para clases,\nexámenes o eventos" as UC3
-  usecase "Registrar infraestructura\n(aulas y auditorios)" as UC4
-  usecase "Gestionar capacidad y\nrecursos disponibles" as UC5
-  usecase "Asignar y coordinar\nespacios" as UC6
-  usecase "Validar disponibilidad\n(sin sobrecupos ni empalmes)" as UC7
-  usecase "Modificar o cancelar\nasignación de espacio" as UC8
-
-  UC6 ..> UC7 : <<include>>
-}
-
-Alumno --> UC1
-Alumno --> UC2
-Profesor --> UC1
-Profesor --> UC2
-Profesor --> UC3
-Admin --> UC1
-Admin --> UC2
-Admin --> UC3
-Admin --> UC4
-Admin --> UC5
-Admin --> UC6
-Admin --> UC8
-@enduml
-```
+**Imagen PNG:** [Ver imagen de casos de uso](resources/imgs/m8_Aulas_casos_uso.png)
 
 ![Diagrama de casos de uso del Módulo 8: Aulas](resources/imgs/m8_Aulas_casos_uso.png)
 
 ### Descripción de los casos de uso
 
 - **UC1: Consultar aulas y recursos disponibles:** Permite a alumnos, profesores y administradores filtrar y visualizar el catálogo de aulas activas junto con su equipamiento instalado.
+
 - **UC2: Consultar horarios y asignaciones de espacios:** Muestra la cuadrícula de ocupación por día y hora para verificar qué espacios están reservados o libres.
+
 - **UC3: Solicitar espacio para clases, exámenes o eventos:** Permite a docentes y coordinadores enviar una solicitud indicando fecha, horario, aforo y tipo de actividad.
+
 - **UC4: Registrar infraestructura (aulas y auditorios):** Utilizado por la administración para dar de alta, modificar datos o retirar recintos del inventario escolar.
+
 - **UC5: Gestionar capacidad y recursos disponibles:** Actualiza el aforo máximo permitido e inventario de instalaciones (tecnología y mobiliario) asociadas a un aula.
+
 - **UC6: Asignar y coordinar espacios:** Vincula un grupo o evento a un aula específica en un bloque de tiempo determinado.
-- **UC7: Validar disponibilidad (sin sobrecupos ni empalmes) `<<include>>`:** Proceso automatizado que verifica en tiempo real que el aula esté libre y que los inscritos no superen la capacidad máxima.
+
+- **UC7: Validar disponibilidad (sin sobrecupos ni empalmes):** Proceso automatizado que verifica en tiempo real que el aula esté libre y que los inscritos no superen la capacidad máxima. Este caso de uso se incluye dentro de UC6.
+
 - **UC8: Modificar o cancelar asignación de espacio:** Permite ajustar los parámetros de una reserva existente o liberar el aula para dejarla disponible nuevamente.
 
 ## Diagrama de estados
 
-Los dos diagramas siguientes describen objetos diferentes dentro del Módulo 8. Los estados específicos constituyen una propuesta de modelado que debe validarse con las reglas del equipo.
+Los siguientes diagramas representan los cambios de estado de dos objetos involucrados en el Módulo de Asignación de Aulas: la solicitud de espacio y la asignación de aula.
 
-### Estados de la solicitud de espacio
+### Diagrama 1. Estados de la solicitud de espacio
 
-Representa el ciclo de vida de una solicitud iniciada por un profesor o por el Administrador / Coordinador. Se verifica la disponibilidad del espacio y el aforo antes de aprobarla o rechazarla. Una solicitud aprobada puede generar una asignación de aula.
+Representa el ciclo de vida de una solicitud iniciada por un Profesor o por el Administrador / Coordinador.
 
-**Código fuente:** [e5_m8_aulas_estados_solicitud.uml](../docs/architecture/diagrams/e5_m8_aulas_estados_solicitud.uml)
+La solicitud se registra y posteriormente se revisa para verificar la disponibilidad del espacio y el cumplimiento de la capacidad permitida.
 
-![Diagrama de estados de una solicitud de espacio del Módulo 8](../docs/architecture/diagrams/e5_m8_aulas_estados_solicitud.png)
+Dependiendo del resultado de las validaciones, la solicitud podrá ser aprobada o rechazada. Una solicitud aprobada puede dar origen a una asignación de aula.
 
-### Estados de la asignación de aula
+**Código fuente UML:** [Ver estados de solicitud de espacio](../docs/architecture/diagrams/e5_m8_aulas_estados_solicitud.uml)
 
-Representa una reserva ya aprobada que puede programarse, modificarse, entrar en uso, finalizar o cancelarse. Cuando se modifica la asignación, se comprueban nuevamente la disponibilidad del aula y la capacidad antes de guardar los cambios.
+**Imagen PNG:** [Ver imagen del diagrama](../docs/architecture/diagrams/e5_m8_aulas_estados_solicitud.png)
 
-**Código fuente:** [e5_m8_aulas_estados_asignacion.uml](../docs/architecture/diagrams/e5_m8_aulas_estados_asignacion.uml)
+![Diagrama de estados de la solicitud de espacio](../docs/architecture/diagrams/e5_m8_aulas_estados_solicitud.png)
 
-![Diagrama de estados de una asignación de aula del Módulo 8](../docs/architecture/diagrams/e5_m8_aulas_estados_asignacion.png)
+### Diagrama 2. Estados de la asignación de aula
+
+Representa el ciclo de vida de una asignación de aula previamente aprobada.
+
+Una asignación confirmada puede mantenerse programada hasta el inicio de la actividad, modificarse, cancelarse o finalizar cuando concluya el periodo de utilización del espacio.
+
+En caso de modificaciones, el sistema deberá comprobar nuevamente la disponibilidad del aula y el cumplimiento del aforo permitido.
+
+**Código fuente UML:** [Ver estados de asignación de aula](../docs/architecture/diagrams/e5_m8_aulas_estados_asignacion.uml)
+
+**Imagen PNG:** [Ver imagen del diagrama](../docs/architecture/diagrams/e5_m8_aulas_estados_asignacion.png)
+
+![Diagrama de estados de la asignación de aula](../docs/architecture/diagrams/e5_m8_aulas_estados_asignacion.png)
 
 ## Glosario y Abreviaturas
 
 | Abreviatura / Término | Definición |
-| :--- | :--- |
+|---|---|
 | **AUL-TEO** | Aula Teórica: Espacio físico destinado a clases magistrales o teóricas. |
 | **AUD-CEN** | Auditorio Central: Espacio de alta capacidad para conferencias o evaluaciones masivas. |
 | **CAP-AUL** | Capacidad del Aula: Límite máximo de alumnos permitidos por normativa de espacio/aforo. |
 
 ## Requerimientos No funcionales
 
-1. **RNF-01 Tiempo de Respuesta en Validaciones:** Garantizar que la verificación de disponibilidad e idoneidad del aula se realice en menos de 5 segundos durante el proceso de programación de horarios y exámenes.
+**RNF-01. Tiempo de respuesta en validaciones**
+
+Garantizar que la verificación de disponibilidad e idoneidad del aula se realice en menos de 5 segundos durante el proceso de programación de horarios y exámenes.
 
 ## Diagramas de Contexto (Nivel 0 y Nivel 1)
 
-```plantuml
-@startuml Modulo8_Aulas_Completo
-title Módulo 8: Asignación de Aulas (Nivel 0 y Nivel 1)
+Los diagramas de contexto representan las interacciones del Módulo de Asignación de Aulas con los usuarios, módulos externos y componentes internos del Sistema de Control Escolar.
 
-skinparam defaultTextAlignment center
-skinparam packageStyle rectangle
-skinparam shadowing false
+El Nivel 0 muestra las relaciones generales con otros módulos, mientras que el Nivel 1 presenta la distribución de componentes y servicios internos.
 
-package "Nivel 0 (Contexto)" {
-    rectangle "Módulo de Alumnos" as modAlumnos0
-    rectangle "Módulo Calendario de Exámenes" as modExamenes0
-    rectangle "Módulo de Inscripciones" as modInscripciones0
-    rectangle "Administrador / Coordinador" as admin0
+**Código fuente UML:** [Ver diagramas de contexto](../docs/architecture/diagrams/e5_m8_aulas_contexto.uml)
 
-    storage "Sistema de Gestión y\nAsignación de Aulas" as sistema0
+**Imagen PNG:** [Ver imagen de diagramas de contexto](resources/imgs/m8_Aulas_contexto.png)
 
-    admin0 --> sistema0 : Gestión de infraestructura y asignaciones
-    modAlumnos0 --> sistema0 : Consulta aula de horario / Valida aforo para cambio de grupo
-    modExamenes0 --> sistema0 : Solicitud de aula para evaluación
-    modInscripciones0 --> sistema0 : Solicitud de aula para clase regular
-
-    sistema0 --> modAlumnos0 : Detalle de espacio y confirmación de cupo
-    sistema0 --> modExamenes0 : Confirmación / Rechazo de aula libre
-    sistema0 --> modInscripciones0 : Confirmación / Rechazo de aula libre
-}
-
-package "Nivel 1 (Contenedores / Subsistemas)" {
-    rectangle "Administrador / Coordinador" as admin1
-    rectangle "Profesor / Alumno" as user1
-
-    rectangle "Módulo de Alumnos" as modAlumnos1
-    rectangle "Módulo Calendario de Exámenes" as modExamenes1
-    rectangle "Módulo de Inscripciones" as modInscripciones1
-
-    rectangle "Aplicación Web / Móvil\n(Front-End)" as app1
-
-    package "API Backend (Servicios de Aulas)" {
-        storage "Servicio de Gestión\nde Infraestructura" as infraSvc1
-        storage "Servicio de Asignación\ny Reservas" as reserSvc1
-        storage "Servicio de Consulta\nde Espacios" as consultaSvc1
-        storage "Validador de Disponibilidad\ny Aforo" as validSvc1
-    }
-
-    database "Cache de Horarios" as cache1
-    database "Base de Datos de Infraestructura" as db1
-    queue "Cola de Eventos" as queue1
-
-    storage "Servicio de Notificaciones" as notifSvc1
-
-    ' Conexiones de Actores e Interfaces
-    admin1 --> app1 : HTTP/S
-    user1 --> app1 : HTTP/S
-
-    app1 --> infraSvc1 : HTTP/REST
-    app1 --> reserSvc1 : HTTP/REST
-    app1 --> consultaSvc1 : HTTP/REST
-
-    ' Integración de Módulos Externos hacia el Backend
-    modAlumnos1 --> consultaSvc1 : HTTP/REST (Consulta aula / aforo)
-    modExamenes1 --> reserSvc1 : HTTP/REST (Reserva examen)
-    modInscripciones1 --> reserSvc1 : HTTP/REST (Reserva clase regular)
-
-    ' Lógica interna del Backend y Persistencia
-    reserSvc1 --> validSvc1
-    infraSvc1 --> db1
-    reserSvc1 --> db1
-    consultaSvc1 --> cache1
-    consultaSvc1 --> db1
-
-    ' Procesamiento Asíncrono
-    reserSvc1 --> queue1
-    queue1 --> notifSvc1
-}
-@enduml
-```
-
-![Diagramas de contexto (Nivel 0 y Nivel 1) del Módulo 8: Aulas](resources/imgs/m8_Aulas_contexto.png)
+![Diagramas de contexto del Módulo 8: Aulas](resources/imgs/m8_Aulas_contexto.png)
 
 ### Descripción del diagrama de nivel 0 (Contexto)
 
 - **Administrador / Coordinador:** Interactúa con el sistema registrando la infraestructura física, definiendo aforos y gestionando directamente las asignaciones manuales o correcciones.
+
 - **Módulo de Alumnos:** Envía peticiones de consulta sobre la ubicación física del aula para su horario o verifica la disponibilidad de aforo en caso de solicitudes de cambio de grupo.
+
 - **Módulo Calendario de Exámenes:** Emite solicitudes de reserva de espacios (aulas o auditorios) para la aplicación de evaluaciones parciales, ordinarias, extraordinarias y de título.
+
 - **Módulo de Inscripciones:** Solicita la asignación e idoneidad de espacios físicos para el catálogo de clases regulares del periodo académico.
 
 ### Descripción del diagrama de nivel 1 (Contenedores / Subsistemas)
@@ -244,10 +169,13 @@ package "Nivel 1 (Contenedores / Subsistemas)" {
 #### Servicios Backend
 
 - **Servicios de Infraestructura (infraSvc1):** Administra el catálogo de recintos, capacidad máxima, edificios e inventarios de equipamiento (tecnología, proyectores).
+
 - **Servicio de Asignación y Reservas (reserSvc1):** Procesa y coordina las solicitudes de espacio recibidas tanto desde el Front-End como desde los módulos externos (Inscripciones y Exámenes).
+
 - **Validador de Disponibilidad y Aforo (validSvc1):** Subcomponente especializado que efectúa en tiempo real las comprobaciones algorítmicas de ocupación de horario y validación de aforo antes de confirmar cualquier reserva.
-- **Servicio de Consulta de Espacios (consultaSvc1):** Atiende las búsquedas de horarios y aulas aprovechando la capa de *Caché de Horarios* para asegurar respuestas de alta velocidad.
+
+- **Servicio de Consulta de Espacios (consultaSvc1):** Atiende las búsquedas de horarios y aulas aprovechando la capa de Caché de Horarios para asegurar respuestas de alta velocidad.
 
 #### Infraestructura de Soporte
 
-- **Procesamiento Asíncrono y Eventos:** Emplea una *Cola de Eventos* para desacoplar el envío de notificaciones hacia los usuarios u otros subsistemas al confirmarse un cambio o asignación de espacio.
+- **Procesamiento Asíncrono y Eventos:** Emplea una Cola de Eventos para desacoplar el envío de notificaciones hacia los usuarios u otros subsistemas al confirmarse un cambio o asignación de espacio.
