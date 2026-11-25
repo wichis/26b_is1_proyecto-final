@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Académica" as UI
+participant "Controlador Académico" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Selecciona "Consultar calificaciones"
+UI -> Ctrl : GET /api/alumnos/calificaciones
+Ctrl -> DB : Consultar calificaciones del ciclo
+DB --> Ctrl : Calificaciones parciales/finales
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra boleta / calificaciones
+@enduml

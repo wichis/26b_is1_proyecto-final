@@ -1,0 +1,7 @@
+@startuml
+start
+:Alumno solicita ver materias inscritas;
+:Sistema consulta carga académica actual;
+:Muestra listado de materias y grupos;
+stop
+@enduml

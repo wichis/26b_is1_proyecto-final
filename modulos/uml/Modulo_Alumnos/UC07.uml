@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Académica" as UI
+participant "Controlador Académico" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Selecciona "Consultar horario"
+UI -> Ctrl : GET /api/alumnos/horario
+Ctrl -> DB : Consultar bloques de horario vigentes
+DB --> Ctrl : Días, horas y aulas
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra horario semanal
+@enduml

@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Reinscripción" as UI
+participant "Controlador Reinscripción" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Selecciona "Consultar estado de reinscripción"
+UI -> Ctrl : GET /api/alumnos/reinscripcion/estado
+Ctrl -> DB : Consultar estatus del trámite
+DB --> Ctrl : Estado y observaciones
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra estatus actual
+@enduml

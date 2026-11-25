@@ -1,0 +1,7 @@
+@startuml
+start
+:Alumno consulta estado de reinscripción;
+:Sistema obtiene estatus actual del trámite;
+:Muestra estado (En proceso, Aprobado,\nRechazado o Con observaciones);
+stop
+@enduml

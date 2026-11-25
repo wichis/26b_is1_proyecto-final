@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Académica" as UI
+participant "Controlador Académico" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Selecciona "Consultar historial académico"
+UI -> Ctrl : GET /api/alumnos/historial
+Ctrl -> DB : Consultar kárdex y créditos
+DB --> Ctrl : Historial académico
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra historial y promedio
+@enduml

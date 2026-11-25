@@ -1,0 +1,22 @@
+@startuml
+actor Alumno
+participant "UI Constancias" as UI
+participant "Controlador Constancias" as Ctrl
+participant "Base de Datos" as DB
+participant "Generador PDF" as PDF
+
+Alumno -> UI : Clic en "Descargar constancia de estudios"
+UI -> Ctrl : GET /api/alumnos/constancia
+Ctrl -> DB : Verificar estatus activo del alumno
+alt Alumno activo
+  DB --> Ctrl : Activo
+  Ctrl -> PDF : Generar PDF con folio
+  PDF --> Ctrl : Archivo PDF
+  Ctrl --> UI : 200 OK (PDF)
+  UI --> Alumno : Descarga constancia
+else Alumno no activo
+  DB --> Ctrl : Inactivo / bloqueado
+  Ctrl --> UI : 403 Forbidden
+  UI --> Alumno : Muestra restricción
+end
+@enduml

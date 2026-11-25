@@ -1,0 +1,12 @@
+@startuml
+start
+:Alumno solicita iniciar reinscripción;
+:Sistema verifica periodo vigente y requisitos;
+if (¿Cumple requisitos?) then (Sí)
+  :Registra trámite en estado "En proceso";
+  :Muestra comprobante de inicio;
+else (No)
+  :Muestra motivo por el cual no puede iniciar;
+endif
+stop
+@enduml

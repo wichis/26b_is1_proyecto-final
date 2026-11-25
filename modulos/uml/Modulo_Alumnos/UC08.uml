@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Académica" as UI
+participant "Controlador Académico" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Selecciona "Consultar materias inscritas"
+UI -> Ctrl : GET /api/alumnos/materias-inscritas
+Ctrl -> DB : Consultar carga del periodo actual
+DB --> Ctrl : Lista de materias y grupos
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra materias inscritas
+@enduml

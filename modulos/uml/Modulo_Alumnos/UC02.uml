@@ -1,0 +1,13 @@
+@startuml
+actor Alumno
+participant "UI Perfil" as UI
+participant "Controlador Perfil" as Ctrl
+participant "Base de Datos" as DB
+
+Alumno -> UI : Modifica teléfono/dirección y guarda
+UI -> Ctrl : PATCH /api/alumnos/datos-generales
+Ctrl -> DB : Actualizar datos generales
+DB --> Ctrl : Confirmación
+Ctrl --> UI : 200 OK
+UI --> Alumno : Muestra datos actualizados
+@enduml

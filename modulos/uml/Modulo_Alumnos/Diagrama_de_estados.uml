@@ -1,0 +1,11 @@
+@startuml
+[*] --> SinSolicitud
+SinSolicitud --> EnProceso : Alumno registra solicitud\nde reinscripción
+EnProceso --> ConObservaciones : Servicios escolares detecta\ndocumentación o requisito pendiente
+ConObservaciones --> EnProceso : Alumno subsana\nobservaciones
+EnProceso --> Aprobado : Validación administrativa\nsatisfactoria
+EnProceso --> Rechazado : Incumplimiento de reglamento\no vencimiento de plazo
+Aprobado --> [*] : Carga académica activada
+Rechazado --> [*] : Trámite cerrado
+
+@enduml

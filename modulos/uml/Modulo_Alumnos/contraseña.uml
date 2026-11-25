@@ -1,0 +1,15 @@
+@startuml
+start
+:Alumno ingresa clave actual y clave nueva;
+if (¿Clave actual correcta?) then (Sí)
+  if (¿Nueva clave cumple políticas?) then (Sí)
+    :Actualiza contraseña cifrada;
+    :Muestra éxito del cambio;
+  else (No)
+    :Solicita clave que cumpla políticas;
+  endif
+else (No)
+  :Muestra error de clave actual;
+endif
+stop
+@enduml
