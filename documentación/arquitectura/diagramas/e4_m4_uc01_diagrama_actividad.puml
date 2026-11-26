@@ -1,0 +1,29 @@
+@startuml
+title Coordinador De La Carrera Definir Seriación y Prerrequisitos
+
+start
+
+:Ingresar al módulo de Gestión académica;
+:Seleccionar "Definir seriación / prerrequisitos";
+:Buscar asignatura;
+:Seleccionar asignatura;
+:Consultar prerrequisitos actuales;
+
+if (¿Qué desea realizar?) then (Agregar)
+    :Seleccionar asignatura prerrequisito;
+else (Modificar)
+    :Modificar prerrequisitos existentes;
+endif
+
+:Validar seriación y prerrequisitos;
+
+if (¿La configuración es válida?) then (Sí)
+    :Guardar configuración;
+    :Mostrar mensaje de confirmación;
+else (No)
+    :Mostrar mensaje de error;
+    :Corregir configuración;
+endif
+
+stop
+@enduml
