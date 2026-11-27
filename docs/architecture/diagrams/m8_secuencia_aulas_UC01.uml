@@ -1,0 +1,15 @@
+@startuml
+autonumber
+actor "Usuario\n(Alumno / Profesor / Admin)" as Usuario
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Usuario -> Sistema : Solicitar consulta de aulas y recursos disponibles
+activate Sistema
+Sistema -> BD : Consultar espacios, capacidad y recursos (proyector, equipo, etc.)
+activate BD
+BD --> Sistema : Catálogo de aulas y recursos
+deactivate BD
+Sistema --> Usuario : Mostrar aulas y recursos disponibles
+deactivate Sistema
+@enduml

@@ -1,0 +1,27 @@
+@startuml
+autonumber
+actor "Administrador / Coordinador" as Admin
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Admin -> Sistema : Seleccionar solicitud/actividad y proponer espacio y horario
+activate Sistema
+Sistema -> Sistema : <<include>> Validar disponibilidad\n(sin sobrecupos ni empalmes)
+activate Sistema
+Sistema -> BD : Consultar capacidad del espacio y asignaciones en el rango horario
+activate BD
+BD --> Sistema : Cupo máximo y reservas existentes
+deactivate BD
+deactivate Sistema
+
+alt Espacio disponible y sin sobrecupo
+    Sistema -> BD : Guardar asignación y coordinar espacio
+    activate BD
+    BD --> Sistema : Confirmación de asignación
+    deactivate BD
+    Sistema --> Admin : Notificar asignación exitosa
+else Existe sobrecupo o empalme de horario
+    Sistema --> Admin : Alertar sobre conflicto (sobrecupo o empalme)
+end
+deactivate Sistema
+@enduml

@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor "Solicitante\n(Profesor / Admin)" as Solicitante
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Solicitante -> Sistema : Enviar solicitud de espacio (tipo, fecha, horario, cupo, recursos)
+activate Sistema
+Sistema -> Sistema : Verificar datos completos de la solicitud
+alt Solicitud válida
+    Sistema -> BD : Registrar solicitud de espacio como "Pendiente"
+    activate BD
+    BD --> Sistema : Confirmación de registro
+    deactivate BD
+    Sistema --> Solicitante : Notificar solicitud enviada
+else Datos incompletos o inválidos
+    Sistema --> Solicitante : Mostrar error y campos faltantes
+end
+deactivate Sistema
+@enduml

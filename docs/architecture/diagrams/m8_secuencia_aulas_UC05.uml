@@ -1,0 +1,20 @@
+@startuml
+autonumber
+actor "Administrador / Coordinador" as Admin
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Admin -> Sistema : Seleccionar espacio y actualizar capacidad o recursos
+activate Sistema
+Sistema -> Sistema : Validar cupo y estado de los recursos
+alt Datos válidos
+    Sistema -> BD : Actualizar capacidad y recursos del espacio
+    activate BD
+    BD --> Sistema : Confirmación de actualización
+    deactivate BD
+    Sistema --> Admin : Confirmar cambios en capacidad y recursos
+else Valor inválido (ej. capacidad <= 0)
+    Sistema --> Admin : Mostrar mensaje de error de validación
+end
+deactivate Sistema
+@enduml

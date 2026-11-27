@@ -1,0 +1,24 @@
+@startuml
+autonumber
+actor "Administrador / Coordinador" as Admin
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Admin -> Sistema : Ingresar datos del espacio (nombre/código, tipo, ubicación, capacidad)
+activate Sistema
+Sistema -> BD : Verificar que no exista un espacio duplicado
+activate BD
+BD --> Sistema : Resultado de verificación
+deactivate BD
+
+alt Espacio nuevo y válido
+    Sistema -> BD : Guardar aula o auditorio en infraestructura
+    activate BD
+    BD --> Sistema : Confirmación de guardado
+    deactivate BD
+    Sistema --> Admin : Confirmar registro de infraestructura
+else Duplicado o datos inválidos
+    Sistema --> Admin : Mostrar mensaje de error
+end
+deactivate Sistema
+@enduml

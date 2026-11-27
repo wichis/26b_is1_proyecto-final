@@ -1,0 +1,15 @@
+@startuml
+autonumber
+actor "Usuario\n(Alumno / Profesor / Admin)" as Usuario
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Usuario -> Sistema : Filtrar horarios o espacios a consultar
+activate Sistema
+Sistema -> BD : Consultar asignaciones programadas
+activate BD
+BD --> Sistema : Horarios y espacios asignados
+deactivate BD
+Sistema --> Usuario : Mostrar horarios y asignaciones de espacios
+deactivate Sistema
+@enduml

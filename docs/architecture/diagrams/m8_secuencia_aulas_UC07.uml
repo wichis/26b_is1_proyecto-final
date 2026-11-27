@@ -1,0 +1,38 @@
+@startuml
+autonumber
+actor "Administrador / Coordinador" as Admin
+participant "Sistema / Módulo\nAsignación de Aulas" as Sistema
+database "Base de Datos" as BD
+
+Admin -> Sistema : Seleccionar asignación existente (modificar o cancelar)
+activate Sistema
+
+alt Modificar asignación
+    Admin -> Sistema : Ingresar nuevo espacio, fecha, horario o cupo
+    Sistema -> Sistema : Validar disponibilidad (sin sobrecupos ni empalmes)
+    activate Sistema
+    Sistema -> BD : Consultar disponibilidad y capacidad
+    activate BD
+    BD --> Sistema : Resultado de validación
+    deactivate BD
+    deactivate Sistema
+
+    alt Sin conflictos
+        Sistema -> BD : Actualizar asignación de espacio
+        activate BD
+        BD --> Sistema : Actualización guardada
+        deactivate BD
+        Sistema --> Admin : Confirmar modificación de asignación
+    else Con sobrecupo o empalme
+        Sistema --> Admin : Mostrar conflicto detectado
+    end
+
+else Cancelar asignación
+    Sistema -> BD : Cancelar asignación y liberar espacio
+    activate BD
+    BD --> Sistema : Cancelación registrada
+    deactivate BD
+    Sistema --> Admin : Confirmar cancelación de asignación
+end
+deactivate Sistema
+@enduml
